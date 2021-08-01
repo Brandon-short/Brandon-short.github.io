@@ -1,13 +1,17 @@
 ---
 # Feel free to add content and custom Front Matter to this file.
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: default
+title: CCNA
+permalink: /ccna/
 ---
-Landing Page for notes
+# CCNA Notes
 
-[About page](https://brandonvshort.com/about/)
+## Notes
 
-[How to study notes](https://brandonvshort.com/study/)
+### concepts
 
-[ccna notes](https://brandonvshort.com/ccna/)
+### facts
+
+
+### commands
