@@ -7,6 +7,16 @@ permalink: /ccna/
 ---
 # CCNA Notes
 
+- [CCNA Notes](#ccna-notes)
+  - [Networking Basics](#networking-basics)
+  - [TCP/IP Model](#tcpip-model)
+    - [Important ports to remember & their protocol](#important-ports-to-remember--their-protocol)
+    - [Port Ranges](#port-ranges)
+  - [Binary](#binary)
+  - [Hexadecimal](#hexadecimal)
+  - [IP Addressing](#ip-addressing)
+  - [Networking Basics](#networking-basics-1)
+  - [helpful links](#helpful-links)
 
 
 ## Networking Basics
@@ -44,25 +54,51 @@ permalink: /ccna/
 
 ## TCP/IP Model
 - Newest Version of CCNA is using hybrid tcp/ip model:
-  - Application
-  - Transport
-  - Network
-  - Data Link
-  - Physical
+  - 5. Application
+        - PDU = application data
+  - 4. Transport
+        - PDU = Segments
+  - 3. Network
+        - PDU = Packets
+  - 2. Data Link
+        - PDU = Frames
+        - if Type field = 0x800 that indicates ipv4
+        - if Type field = 0x806 that indicates arp
+  - 1. Physical
+        - PDU = Bits
+
+### Important ports to remember & their protocol
+|Service   	|Port      	|Protocol   |
+|-----------|-----------|-----------|
+|FTP data   |20   	    |TCP     	|
+|FTP command|21   	    |TCP     	|
+|ssh  	    |22  	    |UDP     	|
+|Telnet	    |23  	    |UDP     	|
+|smtp	    |25  	    |TCP     	|
+|DNS   	    |53  	    |TCP & UDP 	|
+|TFTP  	    |69  	    |UDP     	|
+|http   	|80   	    |TCP        |
+|pop3   	|110   	    |TCP        |
+|https 	    |443     	|TCP     	|
+
+### Port Ranges
+- System ports = 0 - 1023
+- User ports = 1024 - 49151
+- dynamic/private/ephemeral ports = 49152 -65535
+- these ranges can change depending on OS 
 
 ## Binary
+#Table
+|Exponent|2^7| 2^6| 2^5| 2^4| 2^3| 2^2| 2^1| 2^0|
+|---|---|---|---|---|---|---|---|---|
+|Binary|1|1|1|1|1|1|1|1|
+|Decimal |128|64|32|16|8|4|2|1|
 
 ## Hexadecimal
 
 ## IP Addressing
 
 ## Networking Basics
-
-
-### facts
-
-
-### commands
 
 
 
