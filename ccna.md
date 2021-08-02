@@ -15,7 +15,10 @@ permalink: /ccna/
   - [Binary](#binary)
   - [Hexadecimal](#hexadecimal)
   - [IP Addressing](#ip-addressing)
+    - [Address Classes](#address-classes)
+    - [special addresses](#special-addresses)
   - [Networking Basics](#networking-basics-1)
+  - [Resources](#resources)
   - [helpful links](#helpful-links)
 
 
@@ -58,8 +61,18 @@ permalink: /ccna/
         - PDU = application data
   - 4. Transport
         - PDU = Segments
+        - TCP
+          - Connection oriented protocol
+          - Transmitter -> SYN      ->   Receiver
+          - Transmitter <- SYN ACK  <-   Receiver
+          - Transmitter -> ACK      ->   Receiver
+        - UDP
+          - 
   - 3. Network
         - PDU = Packets
+        - IP Protocol is not connection oriented like TCP
+          - Packets are treated independently and may take different paths
+          - IP is a best effort delivery system with no data recovery features
   - 2. Data Link
         - PDU = Frames
         - if Type field = 0x800 that indicates ipv4
@@ -116,10 +129,37 @@ permalink: /ccna/
 |   F	|1111  	|   15	|
 
 ## IP Addressing
+- 32 bits total with 4 octets
+  - x.x.x.x
+- Routers maintain routing tables that use network addresses
+### Address Classes
+- Class A = 0.0.0.0 - 127.255.255.255 = unicast
+  - 127.x.x.x is reserved for loopback
+  - 0 is reserved for network
+- Class B 128.0.0.0 - 191.255.255.255 = Unicast
+- Class C 192.0.0.0 - 223.255.255.255 = Unicast
+- Class D = 224.0.0.0 - 239.255.255.255  multicast
+- Class E = 240.0.0.0 - 255.255.255.255 reserved for future or experimental purposes
+- These classes have largely been replaced by CIDR
+- IPv6 = no class addresses
+
+
+### special addresses
+- Directed broadcast address
+  - host sends data to all devices on a specific network
+    - i.e. network 172.31.0.0 would see a directed broadcast of 173.31.255.255
+  - routers can be programmed to route directed broadcasts but it's usually disabled by default
+- Local Broadcast Address
+  - used to communicate with all devices on a local network
+    - the request would look like 255.255.255.255
+    - always dropped by routers 
+
+
+
 
 ## Networking Basics
 
-
+## Resources
 
 ## helpful links
  [Cisco's intro to packet tracer](https://www.netacad.com/courses/packet-tracer/introduction-packet-tracer)
