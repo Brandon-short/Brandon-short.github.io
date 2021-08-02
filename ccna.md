@@ -69,7 +69,7 @@ permalink: /ccna/
 
 ### Important ports to remember & their protocol
 |Service   	|Port      	|Protocol   |
-|-----------|-----------|-----------|
+|---|---|---|
 |FTP data   |20   	    |TCP     	|
 |FTP command|21   	    |TCP     	|
 |ssh  	    |22  	    |UDP     	|
@@ -96,6 +96,25 @@ permalink: /ccna/
 
 ## Hexadecimal
 
+|Hexadecimal   	|Bindary   	|Decimal   	|
+|---	|---	|---	|
+|   0	|0000  	|   0	|
+|   1	|0001  	|   1	|
+|   2	|0010  	|   2	|
+|   3	|0011  	|   3	|
+|   4	|0100  	|   4	|
+|   5	|0101  	|   5	|
+|   6	|0110  	|   6	|
+|   7	|0111  	|   7	|
+|   8	|1000  	|   8	|
+|   9	|1001  	|   9	|
+|   A	|1010  	|   10	|
+|   B	|1011  	|   11	|
+|   C	|1100  	|   12	|
+|   D	|1101  	|   13	|
+|   E	|1110  	|   14	|
+|   F	|1111  	|   15	|
+
 ## IP Addressing
 
 ## Networking Basics
@@ -113,3 +132,5 @@ Security fundamentals = 15%
 Automation and programmability = 10%
 
 [free webinars from Ivan Pepelnjak](https://www.ipspace.net/Subscription/Free)
+
+[David Bombals binary/decimal/subnetting] quizzes(https://davidbombal.com/free-quiz/)
