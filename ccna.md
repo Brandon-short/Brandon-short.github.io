@@ -16,7 +16,7 @@ permalink: /ccna/
   - [Hexadecimal](#hexadecimal)
   - [IP Addressing](#ip-addressing)
     - [Address Classes](#address-classes)
-    - [special addresses](#special-addresses)
+    - [Special Addresses](#special-addresses)
   - [OSPF](#ospf)
   - [Multicast](#multicast)
   - [Networking Basics](#networking-basics-1)
@@ -53,8 +53,8 @@ permalink: /ccna/
     - layer 3
   - Access Points
     - Can be lightweight or autonomous
-  - Wireless Lan Controller
-    - Used to manage multiple Acess Points
+  - Wireless LAN Controller
+    - Used to manage multiple Access Points
 
 
 ## TCP/IP Model
@@ -111,7 +111,7 @@ permalink: /ccna/
 
 ## Hexadecimal
 
-|Hexadecimal   	|Bindary   	|Decimal   	|
+|Hexadecimal   	|Binary   	|Decimal   	|
 |---	|---	|---	|
 |   0	|0000  	|   0	|
 |   1	|0001  	|   1	|
@@ -146,7 +146,7 @@ permalink: /ccna/
 - IPv6 = no class addresses
 
 
-### special addresses
+### Special Addresses
 - Directed broadcast address
   - host sends data to all devices on a specific network
     - i.e. network 172.31.0.0 would see a directed broadcast of 173.31.255.255
@@ -155,6 +155,19 @@ permalink: /ccna/
   - used to communicate with all devices on a local network
     - the request would look like 255.255.255.255
     - always dropped by routers unless DHCP helpers & relays are in place 
+  - Local Loopback address
+    - 127.X.X.X ( usually 127.0.0.1)
+    - or ::1 for ipv6
+    - used to test a devices TCP/IP stack
+  - RFC1918 addresses
+    - private and non-routable addresses
+      - 10.0.0.0/8
+      - 172.16.0.0/12
+      - 192.168.0.0/16
+  - IPv4 Link-Local Addresses
+    - RFC 3927 Automatic Private IP Address ( APIPA)
+    - non-routable
+
 
 
 
@@ -186,7 +199,7 @@ permalink: /ccna/
     - protocol independent multicast
       - a type of multicast routing protocol
       - PIM dense mode
-      - inital multicast traffic gets flooded and then pruned and could be every 3 min.
+      - initial multicast traffic gets flooded and then pruned and could be every 3 min.
       - PIM sparse mode
         - a shared distribution tree
         - you set a router as a rendezvous point
