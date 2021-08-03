@@ -17,6 +17,8 @@ permalink: /ccna/
   - [IP Addressing](#ip-addressing)
     - [Address Classes](#address-classes)
     - [special addresses](#special-addresses)
+  - [OSPF](#ospf)
+  - [Multicast](#multicast)
   - [Networking Basics](#networking-basics-1)
   - [Resources](#resources)
   - [helpful links](#helpful-links)
@@ -152,10 +154,44 @@ permalink: /ccna/
 - Local Broadcast Address
   - used to communicate with all devices on a local network
     - the request would look like 255.255.255.255
-    - always dropped by routers 
+    - always dropped by routers unless DHCP helpers & relays are in place 
 
 
 
+
+## OSPF
+- Open Shortest Path First
+- Link State routing protocol
+
+
+## Multicast 
+- Devices that need to receive multicast video will join a group
+- Uses Class D address 224.0.0.0 - 239.255.255.255
+  - 224.0.0.0 - 224.0.0.255 = reserved for link local address
+  - OSPF reserved for 224.0.0.5 - 224.0.0.6
+  - rip v2 reserves 224.0.0.9 
+  - eigrp reserves 224.0.0.10
+  - 224.0.1.0 - 238.255.255.255 reserved for globally scoped addresses
+  - Source Specific Multicast addresses reserves 232.0.0.0 - 232.255.255.255 
+  - 233.0.0.0 - 233.255.255.255 reserved for  GLOP addresses
+    - based on Autonomous system numbers
+  - 239.0.0.0 - 239.255.255.255 limited scope address
+    - kind of like 172.16.x.x and 192.168.1.x
+- ### IGMP
+  - IGMPv2 allows receivers to leave IGMP Groups, IGMPv1 didn't do that
+  - Switches must be programmed for IGMP snooping. 
+  - IGMPv3 allows a receiver to choose a source device
+  - Multicast can do Reverse Path forwarding check to prevent receiving duplicate copies of data
+  - PIM
+    - protocol independent multicast
+      - a type of multicast routing protocol
+      - PIM dense mode
+      - inital multicast traffic gets flooded and then pruned and could be every 3 min.
+      - PIM sparse mode
+        - a shared distribution tree
+        - you set a router as a rendezvous point
+        - no flooding
+        - 
 
 ## Networking Basics
 
