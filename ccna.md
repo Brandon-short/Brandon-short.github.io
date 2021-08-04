@@ -20,6 +20,7 @@ permalink: /ccna/
   - [OSPF](#ospf)
   - [Multicast](#multicast)
   - [Networking Basics](#networking-basics-1)
+  - [Helpful Commands](#helpful-commands)
   - [Resources](#resources)
   - [helpful links](#helpful-links)
 
@@ -154,20 +155,26 @@ permalink: /ccna/
   - routers can be programmed to route directed broadcasts but it's usually disabled by default
 - Local Broadcast Address
   - used to communicate with all devices on a local network
-    - the request would look like 255.255.255.255
-    - always dropped by routers unless DHCP helpers & relays are in place 
-  - Local Loopback address
-    - 127.X.X.X ( usually 127.0.0.1)
-    - or ::1 for ipv6
-    - used to test a devices TCP/IP stack
-  - RFC1918 addresses
-    - private and non-routable addresses
-      - 10.0.0.0/8
-      - 172.16.0.0/12
-      - 192.168.0.0/16
-  - IPv4 Link-Local Addresses
-    - RFC 3927 Automatic Private IP Address ( APIPA)
-    - non-routable
+  - the request would look like 255.255.255.255
+  - always dropped by routers unless DHCP helpers & relays are in place 
+- Local Loopback address
+  - 127.X.X.X ( usually 127.0.0.1)
+  - or ::1 for ipv6
+  - used to test a devices TCP/IP stack
+- RFC1918 addresses
+  - private and non-routable addresses
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+- IPv4 Link-Local Addresses
+  - RFC 3927 Automatic Private IP Address ( APIPA)
+  - non-routable
+- Subnet Masks
+  - if 2 devices are on the same subnet they may not need a default gateway. If they are not on the same subnet they may require a default gateway to communicate
+- CIDR
+  - Classless inter-domain routing
+  - Variable length subnet mask (VLSM)
+  - 
 
 
 
@@ -208,6 +215,17 @@ permalink: /ccna/
         - 
 
 ## Networking Basics
+
+## Helpful Commands
+- `hostname Router1`
+- `ip address 192.168.1.1 255.255.255.0 `
+- `enable password cisco`
+- `conf t -> service password-encryption` makes enable password encrypted
+- `enable secret cisco123` secret password overrides enable password
+- `conf t -> line vty 0 4 -> transport input telnet -> password cisco -> login`
+- `conf t -> line con 0 -> password cisco`
+- `conf t -> line con 0 -> login`
+
 
 ## Resources
 
