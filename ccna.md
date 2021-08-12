@@ -17,6 +17,7 @@ permalink: /ccna/
   - [IP Addressing](#ip-addressing)
     - [Address Classes](#address-classes)
     - [Special Addresses](#special-addresses)
+  - [Subnetting](#subnetting)
   - [OSPF](#ospf)
   - [Multicast](#multicast)
   - [Networking Basics](#networking-basics-1)
@@ -175,6 +176,41 @@ permalink: /ccna/
   - Classless inter-domain routing
   - Variable length subnet mask (VLSM)
   - 
+
+## Subnetting
+
+-Subnetting when given an IP
+172.17.34.122 / 20
+172.17.X.122
+X = the binary equivalent of 34
+
+128 64  32  16 | 8   4   2   1
+0   0   1   0  | 0   0   1   0
+
+172.17.32.0     | set host bits to all 0s to get network
+172.17.32.1     | add 1 host bit to get first host address
+172.17.47.254   | subtract 1 host bit from broadcast address
+172.17.47.255   | set all host bits to 1s
+
+- Subnetting for hosts
+  - 2 ^ N -2
+- Subnetting for Networks
+  - 2 ^ N 
+- Helpful Table
+
+|2|^|result|
+|---|---|---|
+|2|1|2|
+|2|2|4|
+|2|3|8|
+|2|4|16|
+|2|5|32|
+|2|6|64|
+|2|7|128|
+|2|8|256|
+|2|9|512|
+|2|10|1024|
+
 
 
 
