@@ -18,6 +18,12 @@ permalink: /ccna/
     - [Address Classes](#address-classes)
     - [Special Addresses](#special-addresses)
   - [Subnetting](#subnetting)
+  - [Data Flows](#data-flows)
+  - [Toplogies](#toplogies)
+  - [Mac Address](#mac-address)
+  - [CSMA/CD](#csmacd)
+  - [Cables](#cables)
+  - [network devices](#network-devices)
   - [OSPF](#ospf)
   - [Multicast](#multicast)
   - [Networking Basics](#networking-basics-1)
@@ -196,6 +202,36 @@ X = the binary equivalent of 34
   - 2 ^ N -2
 - Subnetting for Networks
   - 2 ^ N 
+
+  - 10.123.192.0/18
+
+needs 31 subnets with as many hosts as possible
+Formula is 2 ^ N so that means to get to >= 31 you need 5 bits ( which comes out to be 32)
+
+10.123.X.0
+X
+
+128 64 | 32  16  8   4   2  | 1
+1   1  | 0   0   0   0   0   | 0
+        These  5 boys are stolen
+10.123.192.0/23
+
+next subnet would be 
+128 64 | 32  16  8   4   2  | 1
+1   1  | 0   0   0   0   1   | 0
+10.123.194.0/23
+
+then 
+128 64 | 32  16  8   4   2  | 1
+1   1  | 0   0   0   1   0   | 0
+10.123.196.0/23
+
+then
+128 64 | 32  16  8   4   2  | 1
+1   1  | 0   0   0   1   1   | 0
+10.123.198.0/23
+
+these binary combinations continue so on and so on`
 - Helpful Table
 
 |2|^|result|
@@ -212,7 +248,98 @@ X = the binary equivalent of 34
 |2|10|1024|
 
 
+## Data Flows
+- unicast
+  - a one to one
+- broadcast
+  - one to all
+  - not supported in ipv6
+- multicast
+  - one to subscribed clients 
+  
+## Toplogies
+- Bus
+  - all clients share 1 line
+  - examples are thicknet and thinnet
+    - thinnet is an ethernet variant
+      - max speed of 10 mbps & used coax
 
+## Mac Address
+- Media access control
+- 48 bits
+
+## CSMA/CD
+- Carrier sense Multiple Access/Collision detection
+- used with ethernet
+  - Carrier sense tries to sense what is speaking on network
+  - multiple access is any device can try to communicate as long as no other devices are talking
+  - when ethernet determines a collision  has taken place it sends a jamming signal and then send a random backoff delay signal
+  - the longer the cable & the more hosts the more chances of collisions 
+
+## Cables
+- 10Base2
+  - Coax cable 
+  - 10mbps
+  - 185 meters max
+  - baseband
+- 10baseT
+  - ethernet & rj45 cables
+  - 10mbps
+  - usually unshielded twisted pair cables unless a noisy environments calls for a shielded twisted pair
+  - 100 meters
+  - T means twisted pair
+- UTP types
+  - T568A
+  - T568B
+    - more popular but both should work as they wire a cable straight through
+- Straight through cables
+  - connects from endpoint to switch/hub
+  - MDI ( media independent interface) = ethernet port connection
+- Crossover cable
+  - used when connection like devices
+- Cat1
+  - previously used for telephones
+- Cat2 
+  - used for telephones and data with speeds up to 4mbps
+- Cat3
+  - used for networks up to 10 mbps but now used for telephones
+- Cat4
+  - 20mhz & 16mbps
+- Cat5
+  - 100 mhz & 10/100
+- Cat5E
+  - 100mhz and 1gbps
+  - 100 meter distance
+- Cat6 
+  - 250mhz and 10gbps up to 55m
+  - 100meter distance at 1gbps
+- Cat6A
+  -  500MHZ 10GBS up to 100meters
+- Cat7
+  - 600MHZ
+  - 10gbsps up to 100meters
+  - can use tera connector
+- Cat7a
+  - 1000mhz
+  - 100mbps and up to 40gbps and 100gbps up to 50meters
+  - for new installs go with cat 6a or cat7
+- Cat8
+  - 40gbps
+- DAC
+  - Direct attachment cable
+  - copper twinax with SFPs on each side
+  - supports up to 10gbps
+  - works up to 15m
+    - SFP is hot pluggable
+- Rollover cable
+  - special cable that connects to console ports of routers
+  - usually its a console to db9 
+
+## network devices
+- Hub
+  - layer 1 device
+  - 10baseT
+  - 
 
 
 
@@ -278,3 +405,5 @@ Automation and programmability = 10%
 [free webinars from Ivan Pepelnjak](https://www.ipspace.net/Subscription/Free)
 
 [David Bombals binary/decimal/subnetting] quizzes(https://davidbombal.com/free-quiz/)
+
+[Network Chuck's sweet Fiber video](https://youtu.be/E3DEJ7odWq0)
