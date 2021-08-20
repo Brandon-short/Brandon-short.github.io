@@ -23,7 +23,7 @@ permalink: /ccna/
   - [Mac Address](#mac-address)
   - [CSMA/CD](#csmacd)
   - [Cables](#cables)
-  - [network devices](#network-devices)
+  - [Network Devices](#network-devices)
   - [OSPF](#ospf)
   - [Multicast](#multicast)
   - [Networking Basics](#networking-basics-1)
@@ -335,10 +335,27 @@ these binary combinations continue so on and so on`
   - special cable that connects to console ports of routers
   - usually its a console to db9 
 
-## network devices
+## Network Devices
 - Hub
   - layer 1 device
   - 10baseT
+  - multiport repeater
+  - 1 big dumb collision domain
+- Bridge
+  - layer 2/data link
+  - has MAC address & cam table
+  - uses software to do processing
+  - each interface is a separate collision domain
+  - does not separate broadcast domains
+- Switches
+  - uses hardware for processing & uses ASICs
+  - layer 2 usually
+  - has mac address table
+  - will flood broadcast and multicast traffic by default
+- Routers
+  - layer 3 devices
+  - network layer
+  - routes via IP addresses
   - 
 
 
