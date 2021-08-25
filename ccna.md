@@ -24,6 +24,7 @@ permalink: /ccna/
   - [CSMA/CD](#csmacd)
   - [Cables](#cables)
   - [Network Devices](#network-devices)
+  - [Duplexes and Speeds](#duplexes-and-speeds)
   - [OSPF](#ospf)
   - [Multicast](#multicast)
   - [Networking Basics](#networking-basics-1)
@@ -314,10 +315,10 @@ these binary combinations continue so on and so on`
   - 250mhz and 10gbps up to 55m
   - 100meter distance at 1gbps
 - Cat6A
-  -  500MHZ 10GBS up to 100meters
+  -  500MHZ 10gbps up to 100meters
 - Cat7
   - 600MHZ
-  - 10gbsps up to 100meters
+  - 10gbps up to 100meters
   - can use tera connector
 - Cat7a
   - 1000mhz
@@ -356,7 +357,12 @@ these binary combinations continue so on and so on`
   - layer 3 devices
   - network layer
   - routes via IP addresses
-  - 
+
+
+## Duplexes and Speeds
+- happens when autonegotation fails or manual configurations are incorrect
+- causes performance issues
+- 
 
 
 
