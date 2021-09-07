@@ -69,9 +69,9 @@ permalink: /ccna/
 
 ## TCP/IP Model
 - Newest Version of CCNA is using hybrid tcp/ip model:
-  - 5. Application
+  - 5 Application
         - PDU = application data
-  - 4. Transport
+  - 4 Transport
         - PDU = Segments
         - TCP
           - Connection oriented protocol
@@ -101,20 +101,20 @@ permalink: /ccna/
             - 16 bit source port, 16bit destination port
             - 16 bit UDP length, 16 bit UDP checksum
             - data
-  - 3. Network
+  - 3 Network
         - PDU = Packets
         - IP Protocol is not connection oriented like TCP
           - Packets are treated independently and may take different paths
           - IP is a best effort delivery system with no data recovery features
-  - 2. Data Link
+  - 2 Data Link
         - PDU = Frames
         - if Type field = 0x800 that indicates ipv4
         - if Type field = 0x806 that indicates arp
-  - 1. Physical
+  - 1 Physical
         - PDU = Bits
 
 ### Important ports to remember & their protocol
-|Service   	|Port      	|Protocol   |
+|Service|Port|Protocol|
 |---|---|---|
 |FTP data   |20   	    |TCP     	|
 |FTP command|21   	    |TCP     	|
@@ -435,6 +435,29 @@ these binary combinations continue so on and so on`
   - Trunk ports allow you to send VLAN info across ports for multiple vlans
   - 802.1q frame 
     - has a "Tag" inserted into it that contains 4 parts & the 2 main parts are TPID (0x8100) (Tag Protocol IDentifier) and VLAN ID
+  - Native VLANs
+    - untagged
+    - when a port on a switch is set up as a trunk it can send and receive tagged frames. frames belinging to native vlan do not carry vlan tags. if an untagged frame hits the trunk it will travel across native vlan
+    - management traffic like STP BPDU and DTP will use native vlan
+    - some management traffic always uses vlan 1 if vlan 1 is left as native vlan untagged. if native vlan was changed it will tag the traffic with that vlan 
+      - CDP
+      - VTP
+      - PAgP
+      - UDLD
+    - Native vlan could be used so that you can tag voip traffic from phones, then have the PC it's connected to use the native vlan. May boost security by preventing PC from being able to communicate or eavesdrop on phone
+      - you can use 1 subnet for the voip vlan and 1 subnet for the pc/data vlan
+    - Vlans can be assigned
+      - statically by admin
+      - dynamic vlan
+        - VMPS (vlan membership policy server)
+          - based on source mac address & cisco proprietary
+        - Voice vlan
+          - used by ip phones
+    - VTP
+      - cisco prop layer 2 protocol
+      - allows propogation of vlan info across trunk links
+      - vlan config can get wiped out if done incorrectly
+      - 
 
 ## Helpful Commands
 - `hostname Router1`
