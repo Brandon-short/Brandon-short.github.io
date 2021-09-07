@@ -437,7 +437,7 @@ these binary combinations continue so on and so on`
     - has a "Tag" inserted into it that contains 4 parts & the 2 main parts are TPID (0x8100) (Tag Protocol IDentifier) and VLAN ID
   - Native VLANs
     - untagged
-    - when a port on a switch is set up as a trunk it can send and receive tagged frames. frames belinging to native vlan do not carry vlan tags. if an untagged frame hits the trunk it will travel across native vlan
+    - when a port on a switch is set up as a trunk it can send and receive tagged frames. frames belonging to native vlan do not carry vlan tags. if an untagged frame hits the trunk it will travel across native vlan
     - management traffic like STP BPDU and DTP will use native vlan
     - some management traffic always uses vlan 1 if vlan 1 is left as native vlan untagged. if native vlan was changed it will tag the traffic with that vlan 
       - CDP
@@ -455,7 +455,7 @@ these binary combinations continue so on and so on`
           - used by ip phones
     - VTP
       - cisco prop layer 2 protocol
-      - allows propogation of vlan info across trunk links
+      - allows propagation of vlan info across trunk links
       - vlan config can get wiped out if done incorrectly
       - 
 
