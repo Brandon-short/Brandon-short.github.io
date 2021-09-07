@@ -25,6 +25,7 @@ permalink: /ccna/
   - [Cables](#cables)
   - [Network Devices](#network-devices)
   - [Duplexes and Speeds](#duplexes-and-speeds)
+  - [IP & Connections](#ip--connections)
   - [OSPF](#ospf)
   - [Multicast](#multicast)
   - [Networking Basics](#networking-basics-1)
@@ -77,8 +78,29 @@ permalink: /ccna/
           - Transmitter -> SYN      ->   Receiver
           - Transmitter <- SYN ACK  <-   Receiver
           - Transmitter -> ACK      ->   Receiver
+          - provides acknowledgment and reliability
+          - MTU
+            - maximum transmission unit
+            -   MTU of FastEthernet is 1500 bytes 
+            -   TCP supports 65495
+        -   MSS (Maximum Segment size)
+            -   largest amount of data to be sent
+        -   TCP uses flow control to avoid sending data too quickly
+            -   if sender is sending data faster than receiver can handle it drops data and requires re-transmission 
+            - Header
+              - 16 bit source port, 16 bit destination port
+              - 32 bit sequence number
+              - 32 bit acknowledgment number
+              - header length, reserved, flags, window size
+              - 16bit tcp checksum, 16 bit urgent pointer
+              - options
+              - data
         - UDP
-          - 
+          - delivery not guaranteed
+          - Header
+            - 16 bit source port, 16bit destination port
+            - 16 bit UDP length, 16 bit UDP checksum
+            - data
   - 3. Network
         - PDU = Packets
         - IP Protocol is not connection oriented like TCP
@@ -304,6 +326,7 @@ these binary combinations continue so on and so on`
   - used for telephones and data with speeds up to 4mbps
 - Cat3
   - used for networks up to 10 mbps but now used for telephones
+  - typically used in distances up to 100m
 - Cat4
   - 20mhz & 16mbps
 - Cat5
@@ -361,9 +384,10 @@ these binary combinations continue so on and so on`
 
 ## Duplexes and Speeds
 - happens when autonegotation fails or manual configurations are incorrect
-- causes performance issues
-- 
+- causes performance issues 
 
+## IP & Connections
+- 
 
 
 ## OSPF
@@ -401,6 +425,16 @@ these binary combinations continue so on and so on`
         - 
 
 ## Networking Basics
+- Vlans
+  - vlan = a broadcast domain = logical network (subnet)
+  - when a frame arrives @ switch it gets tagged
+  - trunking
+    - ISL
+      - cisco proprietary
+    - 802.1q
+  - Trunk ports allow you to send VLAN info across ports for multiple vlans
+  - 802.1q frame 
+    - has a "Tag" inserted into it that contains 4 parts & the 2 main parts are TPID (0x8100) (Tag Protocol IDentifier) and VLAN ID
 
 ## Helpful Commands
 - `hostname Router1`
