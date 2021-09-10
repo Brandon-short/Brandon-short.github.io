@@ -30,6 +30,8 @@ permalink: /ccna/
   - [Multicast](#multicast)
   - [Networking Basics](#networking-basics-1)
   - [Helpful Commands](#helpful-commands)
+    - [General Commands](#general-commands)
+    - [VLANs](#vlans)
   - [Resources](#resources)
   - [helpful links](#helpful-links)
 
@@ -457,17 +459,77 @@ these binary combinations continue so on and so on`
       - cisco prop layer 2 protocol
       - allows propagation of vlan info across trunk links
       - vlan config can get wiped out if done incorrectly
-      - 
+      - uses revision numbers
+        - everytime a change is made to vlan database it increments by 1 then gets advertised to all VTP databases in domain
+    - DTP
+      - Dynamic trunking protocol
+      - cisco proprietary
+      - allows dynamic formation of trunks
+      - 2 modes
+        - dynamic auto mode
+          - doesn't initiate but will use trunking if the other side initiates
+        - dynamic desirable
+          - the switch will initiate
+    - STP
+      - Spanning Tree protocol
+      - prevents layer 2 loops in switched environments
+      - 802.1d the OG
+      - RSTP
+        - rapid spanning tree
+        - supports a single instance of spanning tree
+        - converges with much haste
+        - assigns roles to ports
+      - MSTP
+        - multiple spanning tree
+        - optimizes PVST by mapping multiple VLANs to the same spanning tree instance
+        - hast RSTP built in for speedy convergence
+        - 802.1w
+        - used when you have hundreds or thousands of vlans
+      - PVST
+        - per vlan spanning tree
+        - only supported ISL
+        - seperate 802.1d spanning tree instance for each vlan
+      - PVST + 
+        - supports ISL and 802.1q
+      - BDPU
+        - Bridge protocol data unit
+      - Rapid PVST+
+        - rapid per vlan spanning tree plus
+        - 1 spanning tree instance per vlan with rapid convergence
+        - good for use at approximately 10 vlans
+        - default on most cisco switches
+  
 
 ## Helpful Commands
-- `hostname Router1`
-- `ip address 192.168.1.1 255.255.255.0 `
-- `enable password cisco`
-- `conf t -> service password-encryption` makes enable password encrypted
-- `enable secret cisco123` secret password overrides enable password
-- `conf t -> line vty 0 4 -> transport input telnet -> password cisco -> login`
-- `conf t -> line con 0 -> password cisco`
-- `conf t -> line con 0 -> login`
+### General Commands
+  - `hostname Router1`
+  - `ip address 192.168.1.1 255.255.255.0 `
+  - `enable password cisco`
+  - `conf t -> service password-encryption` makes enable password encrypted
+  - `enable secret cisco123` secret password overrides enable password
+  - `conf t -> line vty 0 4 -> transport input telnet -> password cisco -> login`
+  - `conf t -> line con 0 -> password cisco`
+  - `conf t -> line con 0 -> login`
+  - `no ip domain-lookup`
+
+### VLANs
+- Access Ports
+  - `Switch(config-if)# switchport mode access`
+  - `Switch(config-if)# switchport nonegotiate`
+  - `Switch(config-if)# switchport access vlan 69`
+  - `Switch(config-if)# switchport voice vlan 666`
+- Trunk Ports
+  - `Switch(config-if)# switchport trunk encapsulation dot1q`
+  - `Switch(config-if)# switchport mode trunk`
+  - `Switch(config-if)# switchport trunk allowed vlan 69,100-200`
+  - `Switch(config-if)# switchport trunk native vlan 1`
+- -VTP
+  - `Switch(config)vtp domain ccna`
+  - `Switch#vtp domain ccna`
+  - `Switch(config)vtp mode client`
+  - 
+
+
 
 
 ## Resources
