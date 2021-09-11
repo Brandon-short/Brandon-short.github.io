@@ -118,6 +118,7 @@ permalink: /ccna/
         - PDU = Bits
 
 ### Important ports to remember & their protocol
+
 |Service|Port|Protocol|
 |---|---|---|
 |FTP data   |20   	    |TCP     	|
@@ -138,7 +139,6 @@ permalink: /ccna/
 - these ranges can change depending on OS 
 
 ## Binary
-#Table
 
 |Exponent|2^7|2^6|2^5|2^4|2^3|2^2|2^1|2^0|
 |---|---|---|---|---|---|---|---|---|
