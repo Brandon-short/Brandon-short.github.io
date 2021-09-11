@@ -29,9 +29,11 @@ permalink: /ccna/
   - [OSPF](#ospf)
   - [Multicast](#multicast)
   - [Networking Basics](#networking-basics-1)
+    - [Vlans](#vlans)
+    - [STP](#stp)
   - [Helpful Commands](#helpful-commands)
     - [General Commands](#general-commands)
-    - [VLANs](#vlans)
+    - [VLANs](#vlans-1)
   - [Resources](#resources)
   - [helpful links](#helpful-links)
 
@@ -427,77 +429,89 @@ these binary combinations continue so on and so on`
         - 
 
 ## Networking Basics
-- Vlans
-  - vlan = a broadcast domain = logical network (subnet)
-  - when a frame arrives @ switch it gets tagged
-  - trunking
-    - ISL
-      - cisco proprietary
-    - 802.1q
-  - Trunk ports allow you to send VLAN info across ports for multiple vlans
-  - 802.1q frame 
-    - has a "Tag" inserted into it that contains 4 parts & the 2 main parts are TPID (0x8100) (Tag Protocol IDentifier) and VLAN ID
-  - Native VLANs
-    - untagged
-    - when a port on a switch is set up as a trunk it can send and receive tagged frames. frames belonging to native vlan do not carry vlan tags. if an untagged frame hits the trunk it will travel across native vlan
-    - management traffic like STP BPDU and DTP will use native vlan
-    - some management traffic always uses vlan 1 if vlan 1 is left as native vlan untagged. if native vlan was changed it will tag the traffic with that vlan 
-      - CDP
-      - VTP
-      - PAgP
-      - UDLD
-    - Native vlan could be used so that you can tag voip traffic from phones, then have the PC it's connected to use the native vlan. May boost security by preventing PC from being able to communicate or eavesdrop on phone
-      - you can use 1 subnet for the voip vlan and 1 subnet for the pc/data vlan
-    - Vlans can be assigned
-      - statically by admin
-      - dynamic vlan
-        - VMPS (vlan membership policy server)
-          - based on source mac address & cisco proprietary
-        - Voice vlan
-          - used by ip phones
+### Vlans
+- vlan = a broadcast domain = logical network (subnet)
+- when a frame arrives @ switch it gets tagged
+- trunking
+  - ISL
+    - cisco proprietary
+  - 802.1q
+- Trunk ports allow you to send VLAN info across ports for multiple vlans
+- 802.1q frame 
+  - has a "Tag" inserted into it that contains 4 parts & the 2 main parts are TPID (0x8100) (Tag Protocol IDentifier) and VLAN ID
+- Native VLANs
+  - untagged
+  - when a port on a switch is set up as a trunk it can send and receive tagged frames. frames belonging to native vlan do not carry vlan tags. if an untagged frame hits the trunk it will travel across native vlan
+  - management traffic like STP BPDU and DTP will use native vlan
+  - some management traffic always uses vlan 1 if vlan 1 is left as native vlan untagged. if native vlan was changed it will tag the traffic with that vlan 
+    - CDP
     - VTP
-      - cisco prop layer 2 protocol
-      - allows propagation of vlan info across trunk links
-      - vlan config can get wiped out if done incorrectly
-      - uses revision numbers
-        - everytime a change is made to vlan database it increments by 1 then gets advertised to all VTP databases in domain
-    - DTP
-      - Dynamic trunking protocol
-      - cisco proprietary
-      - allows dynamic formation of trunks
-      - 2 modes
-        - dynamic auto mode
-          - doesn't initiate but will use trunking if the other side initiates
-        - dynamic desirable
-          - the switch will initiate
-    - STP
-      - Spanning Tree protocol
-      - prevents layer 2 loops in switched environments
-      - 802.1d the OG
-      - RSTP
-        - rapid spanning tree
-        - supports a single instance of spanning tree
-        - converges with much haste
-        - assigns roles to ports
-      - MSTP
-        - multiple spanning tree
-        - optimizes PVST by mapping multiple VLANs to the same spanning tree instance
-        - hast RSTP built in for speedy convergence
-        - 802.1w
-        - used when you have hundreds or thousands of vlans
-      - PVST
-        - per vlan spanning tree
-        - only supported ISL
-        - seperate 802.1d spanning tree instance for each vlan
-      - PVST + 
-        - supports ISL and 802.1q
-      - BDPU
-        - Bridge protocol data unit
-      - Rapid PVST+
-        - rapid per vlan spanning tree plus
-        - 1 spanning tree instance per vlan with rapid convergence
-        - good for use at approximately 10 vlans
-        - default on most cisco switches
+    - PAgP
+    - UDLD
+  - Native vlan could be used so that you can tag voip traffic from phones, then have the PC it's connected to use the native vlan. May boost security by preventing PC from being able to communicate or eavesdrop on phone
+    - you can use 1 subnet for the voip vlan and 1 subnet for the pc/data vlan
+  - Vlans can be assigned
+    - statically by admin
+    - dynamic vlan
+      - VMPS (vlan membership policy server)
+        - based on source mac address & cisco proprietary
+      - Voice vlan
+        - used by ip phones
+  - VTP
+    - cisco prop layer 2 protocol
+    - allows propagation of vlan info across trunk links
+    - vlan config can get wiped out if done incorrectly
+    - uses revision numbers
+      - everytime a change is made to vlan database it increments by 1 then gets advertised to all VTP databases in domain
+  - DTP
+    - Dynamic trunking protocol
+    - cisco proprietary
+    - allows dynamic formation of trunks
+    - 2 modes
+      - dynamic auto mode
+        - doesn't initiate but will use trunking if the other side initiates
+      - dynamic desirable
+        - the switch will initiate
+###  STP
+- Spanning Tree protocol
+- prevents layer 2 loops in switched environments
+- 802.1d the OG
+- RSTP
+  - rapid spanning tree
+  - supports a single instance of spanning tree
+  - converges with much haste
+  - assigns roles to ports
+- MSTP
+  - multiple spanning tree
+  - optimizes PVST by mapping multiple VLANs to the same spanning tree instance
+  - hast RSTP built in for speedy convergence
+  - 802.1w
+  - used when you have hundreds or thousands of vlans
+- PVST
+  - per vlan spanning tree
+  - only supported ISL
+  - separate 802.1d spanning tree instance for each vlan
+- PVST + 
+  - supports ISL and 802.1q
+- BPDU
+  - Bridge protocol data unit
+  - how switches learn about each other
+  - sent every 2 seconds
+  - used to detect loops for STP
+  - contains lots of info like
+    - Bridge ID - 8 byte value unique to the switch
+  - 3 types of BPDUs
+    - Configuration BPDU
+      - used by spanning tree to provide information to switches
+    - Topology Change BPDU
+      - tell a switch of a change
+    - Acknowledgment BPDU
+      - confirm the receipt of a topology change
+- Rapid PVST+
+  - rapid per vlan spanning tree plus
+  - 1 spanning tree instance per vlan with rapid convergence
+  - good for use at approximately 10 vlans
+  - default on most cisco switches
   
 
 ## Helpful Commands
