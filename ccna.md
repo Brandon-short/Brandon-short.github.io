@@ -137,7 +137,6 @@ permalink: /ccna/
 - User ports = 1024 - 49151
 - dynamic/private/ephemeral ports = 49152 -65535
 - these ranges can change depending on OS 
-
 ## Binary
 
 |Exponent|2^7|2^6|2^5|2^4|2^3|2^2|2^1|2^0|
@@ -481,6 +480,9 @@ these binary combinations continue so on and so on`
   - supports a single instance of spanning tree
   - converges with much haste
   - assigns roles to ports
+  - Edge port
+    - Ports directly connected to endpoints and corresponds with portfast port
+    - an edge port that receives a BPDU will turn in into a normal spanning tree port
 - MSTP
   - multiple spanning tree
   - optimizes PVST by mapping multiple VLANs to the same spanning tree instance
@@ -507,26 +509,45 @@ these binary combinations continue so on and so on`
       - tell a switch of a change
     - Acknowledgment BPDU
       - confirm the receipt of a topology change
+  - types of ports in STP
+    - Root Port
+      - Port closest to root bridge in terms of path cost
+    - Designated Port
+      - best port to use to get to the root bridge
+    - Blocked Ports
+      - Backup port
+        - port that is blocked because it is receiving more useful BPDUs from the same bridge it is on
+      - Alternate Port
+        - port that is blocked because it is receiving more useful BPDUs from another bridge
+  - BPDU Guard
+    - used on access or portfast ports
+    - if a BPDU is received from a switch it shuts the port down
+    - `spanning tree BPDU guard enable`
 - Rapid PVST+
   - rapid per vlan spanning tree plus
   - 1 spanning tree instance per vlan with rapid convergence
   - good for use at approximately 10 vlans
   - default on most cisco switches
+- CDP / LLDP
+  - cisco discovery protocol
+  - uses multicast frames
   
 
 ## Helpful Commands
 ### General Commands
-  - `hostname Router1`
-  - `ip address 192.168.1.1 255.255.255.0 `
-  - `enable password cisco`
-  - `conf t -> service password-encryption` makes enable password encrypted
-  - `enable secret cisco123` secret password overrides enable password
-  - `conf t -> line vty 0 4 -> transport input telnet -> password cisco -> login`
-  - `conf t -> line con 0 -> password cisco`
-  - `conf t -> line con 0 -> login`
-  - `no ip domain-lookup`
+
+- `hostname Router1`
+- `ip address 192.168.1.1 255.255.255.0 `
+- `enable password cisco`
+- `conf t -> service password-encryption` makes enable password encrypted
+- `enable secret cisco123` secret password overrides enable password
+- `conf t -> line vty 0 4 -> transport input telnet -> password cisco -> login`
+- `conf t -> line con 0 -> password cisco`
+- `conf t -> line con 0 -> login`
+- `no ip domain-lookup`
 
 ### VLANs
+
 - Access Ports
   - `Switch(config-if)# switchport mode access`
   - `Switch(config-if)# switchport nonegotiate`
@@ -537,10 +558,13 @@ these binary combinations continue so on and so on`
   - `Switch(config-if)# switchport mode trunk`
   - `Switch(config-if)# switchport trunk allowed vlan 69,100-200`
   - `Switch(config-if)# switchport trunk native vlan 1`
-- -VTP
+- VTP
   - `Switch(config)vtp domain ccna`
   - `Switch#vtp domain ccna`
   - `Switch(config)vtp mode client`
+- STP
+  - `Switch(config)spanning-tree portfast edge bpduguard`
+  - `Switch(config-if)#spanning-tree portfast`
   - 
 
 
