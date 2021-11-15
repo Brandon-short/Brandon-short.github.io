@@ -531,7 +531,95 @@ these binary combinations continue so on and so on`
 - CDP / LLDP
   - cisco discovery protocol
   - uses multicast frames
-  
+
+## IP Routing
+
+### Routing vs Routed protocols
+
+- Routed Protocols
+  - ipv4 / ipv6
+  - carries user information
+- Routing Protocols
+  - EIGRP / OSPF / RIP / ISIS / BGP
+
+### Static vs Dynamic Routing
+
+- Static Routing
+  - administrator manually enters the route but there's no overhead on network
+  - adminstration can be cumbersome
+
+- Dynamic Routing
+  - more complex but updates routing tables automatically
+
+### Determing best routes
+- static = admin decides
+- RIP = hop count
+- OSPF = bandwidth ( common in enterprises)
+- EIGRP = bandwidth + delay ( common in cisco enterprises )
+  - EIGRP is cisco proprietary
+
+### routing terms
+
+- AS ( autonomous system)
+  - grouping of networks under a single administrative domain
+-IGPs ( interior gateway routing protocols)
+  - used within an AS
+  - RIP, OSPF, EIGRP
+- EGPs ( Exterior Gateway Routing Protocols) 
+  - used between AS's
+- Administrative distance
+  - used as a tiebreaker if there's 2 routes that can't agree on a path
+  - the lower the administrative distance wins and will be put in routing table
+    - a connected interface = 0
+    - static route = 1
+    - internal EIGRP = 90
+    - OSPF = 110
+    - RIP = 120
+    - unknown = 255
+- Classful routing protocols
+  - don't advertise subnet mask
+  - i.e rip v1
+  - not used today because not everything can be a /24 or whatever
+-  Auto summarization
+  - classful routing protocols automatically summarize 
+    - they would set 10.1.1.0 to /8 and 172.16.2.0 to /16 automatically
+- Classless routing protocols
+  - do advertise subnet mask
+  - can do VLSM ( variable length subnet masks)
+  - longest matched routes take priority so /24 matches before /16 and not administrative distance
+
+### Types of routing protocols
+
+- Distance Vector
+  - determines direction and distance to destination
+  - RIP uses hop count for example
+  - limited visibility
+  - easy to configure
+  - uses Bellman-Ford algorithm
+  - routers advertise routes as a vector of stiance and direction
+  - has multiple features to prevent loops
+- Link state
+  - complete map of it's network 
+  - keeps a database of shortest paths
+  - OSPF uses bandwidth to calculate best path
+  - uses SPF ( shortest path first) algorithm creatbed by djikstra to build topological map
+  - more difficult to configure
+  - floods the network with LSAs, aka link state advertisements
+  - all link state routers create it's topological a toplogoical database
+    - contains info on all routers and all links to those routers and the state of the links
+-Advanced distance Vector
+  - EIGRP
+    - power of link state protocols with ease of distance vector protocols
+    - cisco proprietary
+
+### Routing Protocols
+
+- OSPF
+  - can be broken up into heiarchies
+  - breaks the AS into multiple areas
+  - uses ABRs area border routers and internal routers and AS border router and backbone routers
+
+
 
 ## Helpful Commands
 ### General Commands
@@ -545,6 +633,7 @@ these binary combinations continue so on and so on`
 - `conf t -> line con 0 -> password cisco`
 - `conf t -> line con 0 -> login`
 - `no ip domain-lookup`
+-
 
 ### VLANs
 
@@ -562,10 +651,42 @@ these binary combinations continue so on and so on`
   - `Switch(config)vtp domain ccna`
   - `Switch#vtp domain ccna`
   - `Switch(config)vtp mode client`
+
+### STP/CDP/LLDP/Etherchannel 
+
 - STP
   - `Switch(config)spanning-tree portfast edge bpduguard`
   - `Switch(config-if)#spanning-tree portfast`
-  - 
+  - ` Core2(config-if)#spanning-tree link-type point-to-point `
+- CDP
+  - `Switch#show cdp neighbors`
+  - `Switch(config) cdp run `
+- LLDP
+  - ` Switch#show lldp`
+  - ` Switch#show lldp neighbors detail`
+- Etherchannel
+  - ` Core2(config)#int range gigabitEthernet 1/0/23 - 24 `
+  - ` Core2(config-if-range)#switchport mode trunk `
+  - ` Core2(config-if-range)#channel-group 1 mode active `
+  - ` Core2#show etherchannel summary `
+
+### IP
+
+- DHCP
+ - ` R1(config)# ip dhcp excluded-address 10.1.10.1 10.1.10.10 `
+ - ` R1(config)# ip dhcp pool vlan10 `
+ - ` R1(dhcp-config)# network 10.1.10.0 255.255.255.0 `
+ - ` R1(dhcp-config)# default-router 10.1.10.1 `
+ - ` R1(dhcp-config)# dns-server 10.1.1.254 `
+
+ - 
+  - ` S1(config)# ip route 1.1.1.1 255.255.255.255 10.1.1.254 `
+  - ` S1(config)# ip routing  `
+  - ` S1(config)# ip default-gateway 10.1.1.254 `
+  - ` S1(config-if)# ip helper-address 10.1.1.254  `
+
+
+
 
 
 
