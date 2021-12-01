@@ -31,14 +31,28 @@ permalink: /ccna/
   - [Networking Basics](#networking-basics-1)
     - [Vlans](#vlans)
     - [STP](#stp)
+  - [IP Routing](#ip-routing)
+    - [Routing vs Routed protocols](#routing-vs-routed-protocols)
+    - [Static vs Dynamic Routing](#static-vs-dynamic-routing)
+    - [Determing best routes](#determing-best-routes)
+    - [routing terms](#routing-terms)
+    - [Types of routing protocols](#types-of-routing-protocols)
+    - [Routing Protocols](#routing-protocols)
   - [Helpful Commands](#helpful-commands)
     - [General Commands](#general-commands)
     - [VLANs](#vlans-1)
+    - [STP/CDP/LLDP/Etherchannel](#stpcdplldpetherchannel)
+    - [IP](#ip)
+    - [HSRP (hot standby router protocol)](#hsrp-hot-standby-router-protocol)
+    - [EIGRP](#eigrp)
+    - [NTP](#ntp)
+    - [SYSLOG](#syslog)
+    - [SPAN ports](#span-ports)
   - [Resources](#resources)
   - [helpful links](#helpful-links)
 
-
 ## Networking Basics
+
 - What is network?
   - Built to share resources
 
@@ -54,7 +68,7 @@ permalink: /ccna/
   - Hub
     - a "multi-port repeater"
       - repeated signal from 1 port to all ports
-      - layer 1 
+      - layer 1
   - Switch
     - can read frames and uses MAC address table
     - works at layer 2 but can work at layer 3 if its a managed switch with routing capabilities
@@ -70,8 +84,8 @@ permalink: /ccna/
   - Wireless LAN Controller
     - Used to manage multiple Access Points
 
-
 ## TCP/IP Model
+
 - Newest Version of CCNA is using hybrid tcp/ip model:
   - 5 Application
         - PDU = application data
@@ -85,12 +99,12 @@ permalink: /ccna/
           - provides acknowledgment and reliability
           - MTU
             - maximum transmission unit
-            -   MTU of FastEthernet is 1500 bytes 
+            -   MTU of FastEthernet is 1500 bytes
             -   TCP supports 65495
         -   MSS (Maximum Segment size)
             -   largest amount of data to be sent
         -   TCP uses flow control to avoid sending data too quickly
-            -   if sender is sending data faster than receiver can handle it drops data and requires re-transmission 
+            -   if sender is sending data faster than receiver can handle it drops data and requires re-transmission
             - Header
               - 16 bit source port, 16 bit destination port
               - 32 bit sequence number
@@ -121,22 +135,24 @@ permalink: /ccna/
 
 |Service|Port|Protocol|
 |---|---|---|
-|FTP data   |20   	    |TCP     	|
-|FTP command|21   	    |TCP     	|
-|ssh  	    |22  	    |UDP     	|
-|Telnet	    |23  	    |UDP     	|
-|smtp	    |25  	    |TCP     	|
-|DNS   	    |53  	    |TCP & UDP 	|
-|TFTP  	    |69  	    |UDP     	|
-|http   	|80   	    |TCP        |
-|pop3   	|110   	    |TCP        |
-|https 	    |443     	|TCP     	|
+|FTP data   |20        |TCP      |
+|FTP command|21        |TCP      |
+|ssh       |22       |UDP      |
+|Telnet     |23       |UDP      |
+|smtp     |25       |TCP      |
+|DNS        |53       |TCP & UDP  |
+|TFTP       |69       |UDP      |
+|http    |80        |TCP        |
+|pop3    |110        |TCP        |
+|https      |443      |TCP      |
 
 ### Port Ranges
+
 - System ports = 0 - 1023
 - User ports = 1024 - 49151
 - dynamic/private/ephemeral ports = 49152 -65535
-- these ranges can change depending on OS 
+- these ranges can change depending on OS
+
 ## Binary
 
 |Exponent|2^7|2^6|2^5|2^4|2^3|2^2|2^1|2^0|
@@ -146,30 +162,33 @@ permalink: /ccna/
 
 ## Hexadecimal
 
-|Hexadecimal   	|Binary   	|Decimal   	|
-|---	|---	|---	|
-|   0	|0000  	|   0	|
-|   1	|0001  	|   1	|
-|   2	|0010  	|   2	|
-|   3	|0011  	|   3	|
-|   4	|0100  	|   4	|
-|   5	|0101  	|   5	|
-|   6	|0110  	|   6	|
-|   7	|0111  	|   7	|
-|   8	|1000  	|   8	|
-|   9	|1001  	|   9	|
-|   A	|1010  	|   10	|
-|   B	|1011  	|   11	|
-|   C	|1100  	|   12	|
-|   D	|1101  	|   13	|
-|   E	|1110  	|   14	|
-|   F	|1111  	|   15	|
+|Hexadecimal    |Binary    |Decimal    |
+|--- |--- |--- |
+|   0 |0000   |   0 |
+|   1 |0001   |   1 |
+|   2 |0010   |   2 |
+|   3 |0011   |   3 |
+|   4 |0100   |   4 |
+|   5 |0101   |   5 |
+|   6 |0110   |   6 |
+|   7 |0111   |   7 |
+|   8 |1000   |   8 |
+|   9 |1001   |   9 |
+|   A |1010   |   10 |
+|   B |1011   |   11 |
+|   C |1100   |   12 |
+|   D |1101   |   13 |
+|   E |1110   |   14 |
+|   F |1111   |   15 |
 
 ## IP Addressing
+
 - 32 bits total with 4 octets
   - x.x.x.x
 - Routers maintain routing tables that use network addresses
+
 ### Address Classes
+
 - Class A = 0.0.0.0 - 127.255.255.255 = unicast
   - 127.x.x.x is reserved for loopback
   - 0 is reserved for network
@@ -180,8 +199,8 @@ permalink: /ccna/
 - These classes have largely been replaced by CIDR
 - IPv6 = no class addresses
 
-
 ### Special Addresses
+
 - Directed broadcast address
   - host sends data to all devices on a specific network
     - i.e. network 172.31.0.0 would see a directed broadcast of 173.31.255.255
@@ -189,7 +208,7 @@ permalink: /ccna/
 - Local Broadcast Address
   - used to communicate with all devices on a local network
   - the request would look like 255.255.255.255
-  - always dropped by routers unless DHCP helpers & relays are in place 
+  - always dropped by routers unless DHCP helpers & relays are in place
 - Local Loopback address
   - 127.X.X.X ( usually 127.0.0.1)
   - or ::1 for ipv6
@@ -207,7 +226,6 @@ permalink: /ccna/
 - CIDR
   - Classless inter-domain routing
   - Variable length subnet mask (VLSM)
-  - 
 
 ## Subnetting
 
@@ -227,7 +245,7 @@ X = the binary equivalent of 34
 - Subnetting for hosts
   - 2 ^ N -2
 - Subnetting for Networks
-  - 2 ^ N 
+  - 2 ^ N
 
   - 10.123.192.0/18
 
@@ -242,12 +260,12 @@ X
         These  5 boys are stolen
 10.123.192.0/23
 
-next subnet would be 
+next subnet would be
 128 64 | 32  16  8   4   2  | 1
 1   1  | 0   0   0   0   1   | 0
 10.123.194.0/23
 
-then 
+then
 128 64 | 32  16  8   4   2  | 1
 1   1  | 0   0   0   1   0   | 0
 10.123.196.0/23
@@ -258,6 +276,7 @@ then
 10.123.198.0/23
 
 these binary combinations continue so on and so on`
+
 - Helpful Table
 
 |2|^|result|
@@ -273,17 +292,18 @@ these binary combinations continue so on and so on`
 |2|9|512|
 |2|10|1024|
 
-
 ## Data Flows
+
 - unicast
   - a one to one
 - broadcast
   - one to all
   - not supported in ipv6
 - multicast
-  - one to subscribed clients 
+  - one to many subscribed clients
   
 ## Toplogies
+
 - Bus
   - all clients share 1 line
   - examples are thicknet and thinnet
@@ -291,20 +311,23 @@ these binary combinations continue so on and so on`
       - max speed of 10 mbps & used coax
 
 ## Mac Address
+
 - Media access control
 - 48 bits
 
 ## CSMA/CD
+
 - Carrier sense Multiple Access/Collision detection
 - used with ethernet
   - Carrier sense tries to sense what is speaking on network
   - multiple access is any device can try to communicate as long as no other devices are talking
   - when ethernet determines a collision  has taken place it sends a jamming signal and then send a random backoff delay signal
-  - the longer the cable & the more hosts the more chances of collisions 
+  - the longer the cable & the more hosts the more chances of collisions
 
 ## Cables
+
 - 10Base2
-  - Coax cable 
+  - Coax cable
   - 10mbps
   - 185 meters max
   - baseband
@@ -325,7 +348,7 @@ these binary combinations continue so on and so on`
   - used when connection like devices
 - Cat1
   - previously used for telephones
-- Cat2 
+- Cat2
   - used for telephones and data with speeds up to 4mbps
 - Cat3
   - used for networks up to 10 mbps but now used for telephones
@@ -337,11 +360,11 @@ these binary combinations continue so on and so on`
 - Cat5E
   - 100mhz and 1gbps
   - 100 meter distance
-- Cat6 
+- Cat6
   - 250mhz and 10gbps up to 55m
   - 100meter distance at 1gbps
 - Cat6A
-  -  500MHZ 10gbps up to 100meters
+  - 500MHZ 10gbps up to 100meters
 - Cat7
   - 600MHZ
   - 10gbps up to 100meters
@@ -360,9 +383,10 @@ these binary combinations continue so on and so on`
     - SFP is hot pluggable
 - Rollover cable
   - special cable that connects to console ports of routers
-  - usually its a console to db9 
+  - usually its a console to db9
 
 ## Network Devices
+
 - Hub
   - layer 1 device
   - 10baseT
@@ -384,36 +408,37 @@ these binary combinations continue so on and so on`
   - network layer
   - routes via IP addresses
 
-
 ## Duplexes and Speeds
+
 - happens when autonegotation fails or manual configurations are incorrect
-- causes performance issues 
+- causes performance issues
 
 ## IP & Connections
-- 
-
 
 ## OSPF
+
 - Open Shortest Path First
 - Link State routing protocol
 
+## Multicast
 
-## Multicast 
 - Devices that need to receive multicast video will join a group
 - Uses Class D address 224.0.0.0 - 239.255.255.255
   - 224.0.0.0 - 224.0.0.255 = reserved for link local address
   - OSPF reserved for 224.0.0.5 - 224.0.0.6
-  - rip v2 reserves 224.0.0.9 
+  - rip v2 reserves 224.0.0.9
   - eigrp reserves 224.0.0.10
   - 224.0.1.0 - 238.255.255.255 reserved for globally scoped addresses
-  - Source Specific Multicast addresses reserves 232.0.0.0 - 232.255.255.255 
+  - Source Specific Multicast addresses reserves 232.0.0.0 - 232.255.255.255
   - 233.0.0.0 - 233.255.255.255 reserved for  GLOP addresses
     - based on Autonomous system numbers
   - 239.0.0.0 - 239.255.255.255 limited scope address
     - kind of like 172.16.x.x and 192.168.1.x
+
 - ### IGMP
+
   - IGMPv2 allows receivers to leave IGMP Groups, IGMPv1 didn't do that
-  - Switches must be programmed for IGMP snooping. 
+  - Switches must be programmed for IGMP snooping.
   - IGMPv3 allows a receiver to choose a source device
   - Multicast can do Reverse Path forwarding check to prevent receiving duplicate copies of data
   - PIM
@@ -425,10 +450,11 @@ these binary combinations continue so on and so on`
         - a shared distribution tree
         - you set a router as a rendezvous point
         - no flooding
-        - 
 
 ## Networking Basics
+
 ### Vlans
+
 - vlan = a broadcast domain = logical network (subnet)
 - when a frame arrives @ switch it gets tagged
 - trunking
@@ -436,13 +462,13 @@ these binary combinations continue so on and so on`
     - cisco proprietary
   - 802.1q
 - Trunk ports allow you to send VLAN info across ports for multiple vlans
-- 802.1q frame 
+- 802.1q frame
   - has a "Tag" inserted into it that contains 4 parts & the 2 main parts are TPID (0x8100) (Tag Protocol IDentifier) and VLAN ID
 - Native VLANs
   - untagged
   - when a port on a switch is set up as a trunk it can send and receive tagged frames. frames belonging to native vlan do not carry vlan tags. if an untagged frame hits the trunk it will travel across native vlan
   - management traffic like STP BPDU and DTP will use native vlan
-  - some management traffic always uses vlan 1 if vlan 1 is left as native vlan untagged. if native vlan was changed it will tag the traffic with that vlan 
+  - some management traffic always uses vlan 1 if vlan 1 is left as native vlan untagged. if native vlan was changed it will tag the traffic with that vlan
     - CDP
     - VTP
     - PAgP
@@ -471,7 +497,9 @@ these binary combinations continue so on and so on`
         - doesn't initiate but will use trunking if the other side initiates
       - dynamic desirable
         - the switch will initiate
-###  STP
+
+### STP
+
 - Spanning Tree protocol
 - prevents layer 2 loops in switched environments
 - 802.1d the OG
@@ -493,7 +521,7 @@ these binary combinations continue so on and so on`
   - per vlan spanning tree
   - only supported ISL
   - separate 802.1d spanning tree instance for each vlan
-- PVST + 
+- PVST +
   - supports ISL and 802.1q
 - BPDU
   - Bridge protocol data unit
@@ -552,6 +580,7 @@ these binary combinations continue so on and so on`
   - more complex but updates routing tables automatically
 
 ### Determing best routes
+
 - static = admin decides
 - RIP = hop count
 - OSPF = bandwidth ( common in enterprises)
@@ -565,7 +594,7 @@ these binary combinations continue so on and so on`
 -IGPs ( interior gateway routing protocols)
   - used within an AS
   - RIP, OSPF, EIGRP
-- EGPs ( Exterior Gateway Routing Protocols) 
+- EGPs ( Exterior Gateway Routing Protocols)
   - used between AS's
 - Administrative distance
   - used as a tiebreaker if there's 2 routes that can't agree on a path
@@ -580,9 +609,9 @@ these binary combinations continue so on and so on`
   - don't advertise subnet mask
   - i.e rip v1
   - not used today because not everything can be a /24 or whatever
--  Auto summarization
-  - classful routing protocols automatically summarize 
-    - they would set 10.1.1.0 to /8 and 172.16.2.0 to /16 automatically
+- Auto summarization
+- classful routing protocols automatically summarize
+  - they would set 10.1.1.0 to /8 and 172.16.2.0 to /16 automatically
 - Classless routing protocols
   - do advertise subnet mask
   - can do VLSM ( variable length subnet masks)
@@ -599,7 +628,7 @@ these binary combinations continue so on and so on`
   - routers advertise routes as a vector of stiance and direction
   - has multiple features to prevent loops
 - Link state
-  - complete map of it's network 
+  - complete map of it's network
   - keeps a database of shortest paths
   - OSPF uses bandwidth to calculate best path
   - uses SPF ( shortest path first) algorithm creatbed by djikstra to build topological map
@@ -619,13 +648,12 @@ these binary combinations continue so on and so on`
   - breaks the AS into multiple areas
   - uses ABRs area border routers and internal routers and AS border router and backbone routers
 
-
-
 ## Helpful Commands
+
 ### General Commands
 
 - `hostname Router1`
-- `ip address 192.168.1.1 255.255.255.0 `
+- `ip address 192.168.1.1 255.255.255.0`
 - `enable password cisco`
 - `conf t -> service password-encryption` makes enable password encrypted
 - `enable secret cisco123` secret password overrides enable password
@@ -633,6 +661,7 @@ these binary combinations continue so on and so on`
 - `conf t -> line con 0 -> password cisco`
 - `conf t -> line con 0 -> login`
 - `no ip domain-lookup`
+
 -
 
 ### VLANs
@@ -652,7 +681,7 @@ these binary combinations continue so on and so on`
   - `Switch#vtp domain ccna`
   - `Switch(config)vtp mode client`
 
-### STP/CDP/LLDP/Etherchannel 
+### STP/CDP/LLDP/Etherchannel
 
 - STP
   - `Switch(config)spanning-tree portfast edge bpduguard`
@@ -660,10 +689,10 @@ these binary combinations continue so on and so on`
   - ` Core2(config-if)#spanning-tree link-type point-to-point `
 - CDP
   - `Switch#show cdp neighbors`
-  - `Switch(config) cdp run `
+  - `Switch(config) cdp run`
 - LLDP
-  - ` Switch#show lldp`
-  - ` Switch#show lldp neighbors detail`
+  - `Switch#show lldp`
+  - `Switch#show lldp neighbors detail`
 - Etherchannel
   - ` Core2(config)#int range gigabitEthernet 1/0/23 - 24 `
   - ` Core2(config-if-range)#switchport mode trunk `
@@ -673,58 +702,57 @@ these binary combinations continue so on and so on`
 ### IP
 
 - DHCP
- - ` R1(config)# ip dhcp excluded-address 10.1.10.1 10.1.10.10 `
- - ` R1(config)# ip dhcp pool vlan10 `
- - ` R1(dhcp-config)# network 10.1.10.0 255.255.255.0 `
- - ` R1(dhcp-config)# default-router 10.1.10.1 `
- - ` R1(dhcp-config)# dns-server 10.1.1.254 `
+- ` R1(config)# ip dhcp excluded-address 10.1.10.1 10.1.10.10 `
+- ` R1(config)# ip dhcp pool vlan10 `
+- ` R1(dhcp-config)# network 10.1.10.0 255.255.255.0 `
+- ` R1(dhcp-config)# default-router 10.1.10.1 `
+- ` R1(dhcp-config)# dns-server 10.1.1.254 `
 
- - 
-  - ` S1(config)# ip route 1.1.1.1 255.255.255.255 10.1.1.254 `
-  - ` S1(config)# ip routing  `
-  - ` S1(config)# ip default-gateway 10.1.1.254 `
-  - ` S1(config-if)# ip helper-address 10.1.1.254  `
+-
+- ` S1(config)# ip route 1.1.1.1 255.255.255.255 10.1.1.254 `
+- `S1(config)# ip routing`
+- ` S1(config)# ip default-gateway 10.1.1.254 `
+- `S1(config-if)# ip helper-address 10.1.1.254`
 
 ### HSRP (hot standby router protocol)
- - ` Core1(config-if)# standby 1 ip 10.1.10.254 `
- - ` Core1(config-if)# standby 1 priority 200 `
- - ` Core1(config-if)# standby 1 preempt `
- - ` Core1# show standby`
+
+- ` Core1(config-if)# standby 1 ip 10.1.10.254 `
+- ` Core1(config-if)# standby 1 priority 200 `
+- ` Core1(config-if)# standby 1 preempt `
+- `Core1# show standby`
 
 ### EIGRP
-  - `IntRouter(config)#router eigrp 100 `
-  - `IntRouter(config-router)# network 10.1.1.0 0.0.0.255 `
-  - `IntRouter(config-router)# no auto-summary`
-  - `IntRouter# show ip eigrp interfaces `
+
+- `IntRouter(config)#router eigrp 100`
+- `IntRouter(config-router)# network 10.1.1.0 0.0.0.255`
+- `IntRouter(config-router)# no auto-summary`
+- `IntRouter# show ip eigrp interfaces`
 
 ### NTP
-  - ` R1# show clock `
-  - ` R1(config)# ntp server 10.1.1.201 `
-  - ` R1# clock set 6:40:00 30 NOV 2021`
-  - ` R1# clock timezone EST -5 `
-  - ` R1# clock summer-time american_summer recurring last sun MAR 1:00 last SUN Oct 1:00 `
+
+- ` R1# show clock `
+- ` R1(config)# ntp server 10.1.1.201 `
+- `R1# clock set 6:40:00 30 NOV 2021`
+- ` R1# clock timezone EST -5 `
+- ` R1# clock summer-time american_summer recurring last sun MAR 1:00 last SUN Oct 1:00 `
 
 ### SYSLOG
-- ` R1(config)# logging host 10.1.1.200  `
+
+- `R1(config)# logging host 10.1.1.200`
 - ` R1(config)# service timestamps log datetime msec `
 
 ### SPAN ports
-- ` S1(config)# monitor session 1 source vlan 1 both  `
+
+- `S1(config)# monitor session 1 source vlan 1 both`
 - ` S1(config)# monitor session 1 destination interface fastEthernet 1/0/5 `
 - ` S1(config)# monitor session 1 destination interface fastEthernet 1/0/5 ingress untagged vlan 1 `
-- `S1# show monitor `
-- `S1(config)# no monitor session 1 `
-
-
-
-
-
-
-
+- `S1# show monitor`
+- `S1(config)# no monitor session 1`
 
 ## Resources
 
 ## helpful links
+
  [Cisco's intro to packet tracer](https://www.netacad.com/courses/packet-tracer/introduction-packet-tracer)
 [exam topic list](https://www.cisco.com/content/dam/en_us/training-events/le31/le46/cln/marketing/exam-topics/200-301-CCNA.pdf)
 1.0 Network Fundamentals = 20%
@@ -736,6 +764,6 @@ Automation and programmability = 10%
 
 [free webinars from Ivan Pepelnjak](https://www.ipspace.net/Subscription/Free)
 
-[David Bombals binary/decimal/subnetting] quizzes(https://davidbombal.com/free-quiz/)
+[David Bombals binary/decimal/subnetting] quizzes(<https://davidbombal.com/free-quiz/>)
 
 [Network Chuck's sweet Fiber video](https://youtu.be/E3DEJ7odWq0)
