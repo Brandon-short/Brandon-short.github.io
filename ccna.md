@@ -211,7 +211,7 @@ permalink: /ccna/
 
 ## Subnetting
 
--Subnetting when given an IP
+- Subnetting when given an IP
 172.17.34.122 / 20
 172.17.X.122
 X = the binary equivalent of 34
@@ -684,6 +684,37 @@ these binary combinations continue so on and so on`
   - ` S1(config)# ip routing  `
   - ` S1(config)# ip default-gateway 10.1.1.254 `
   - ` S1(config-if)# ip helper-address 10.1.1.254  `
+
+### HSRP (hot standby router protocol)
+ - ` Core1(config-if)# standby 1 ip 10.1.10.254 `
+ - ` Core1(config-if)# standby 1 priority 200 `
+ - ` Core1(config-if)# standby 1 preempt `
+ - ` Core1# show standby`
+
+### EIGRP
+  - `IntRouter(config)#router eigrp 100 `
+  - `IntRouter(config-router)# network 10.1.1.0 0.0.0.255 `
+  - `IntRouter(config-router)# no auto-summary`
+  - `IntRouter# show ip eigrp interfaces `
+
+### NTP
+  - ` R1# show clock `
+  - ` R1(config)# ntp server 10.1.1.201 `
+  - ` R1# clock set 6:40:00 30 NOV 2021`
+  - ` R1# clock timezone EST -5 `
+  - ` R1# clock summer-time american_summer recurring last sun MAR 1:00 last SUN Oct 1:00 `
+
+### SYSLOG
+- ` R1(config)# logging host 10.1.1.200  `
+- ` R1(config)# service timestamps log datetime msec `
+
+### SPAN ports
+- ` S1(config)# monitor session 1 source vlan 1 both  `
+- ` S1(config)# monitor session 1 destination interface fastEthernet 1/0/5 `
+- ` S1(config)# monitor session 1 destination interface fastEthernet 1/0/5 ingress untagged vlan 1 `
+- `S1# show monitor `
+- `S1(config)# no monitor session 1 `
+
 
 
 
