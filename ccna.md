@@ -38,6 +38,8 @@ permalink: /ccna/
     - [routing terms](#routing-terms)
     - [Types of routing protocols](#types-of-routing-protocols)
     - [Routing Protocols](#routing-protocols)
+    - [Switch Stacking](#switch-stacking)
+    - [NAT](#nat)
   - [Helpful Commands](#helpful-commands)
     - [General Commands](#general-commands)
     - [VLANs](#vlans-1)
@@ -48,8 +50,10 @@ permalink: /ccna/
     - [NTP](#ntp)
     - [SYSLOG](#syslog)
     - [SPAN ports](#span-ports)
+    - [NAT](#nat-1)
   - [Resources](#resources)
   - [helpful links](#helpful-links)
+  - [Shortcuts](#shortcuts)
 
 ## Networking Basics
 
@@ -215,9 +219,9 @@ permalink: /ccna/
   - used to test a devices TCP/IP stack
 - RFC1918 addresses
   - private and non-routable addresses
-    - 10.0.0.0/8
-    - 172.16.0.0/12
-    - 192.168.0.0/16
+    - 10.0.0.0 - 10.255.255.255 - 10.0.0.0/8
+    - 172.16.0.0 - 172.31.255.255 - 172.16.0.0/12
+    - 192.168.0.0 - 192.168.255.255 192.168.0.0/16
 - IPv4 Link-Local Addresses
   - RFC 3927 Automatic Private IP Address ( APIPA)
   - non-routable
@@ -648,6 +652,32 @@ these binary combinations continue so on and so on`
   - breaks the AS into multiple areas
   - uses ABRs area border routers and internal routers and AS border router and backbone routers
 
+### Switch Stacking
+
+- switches become 1 logical unit
+- STP/CDP/VTP function as 1
+- switch stacking often used at access layer
+- chassis aggregation used in distribution and core layers
+  - used for high availability designs
+- stacked switches share a mac address table
+- joined together via special cables using different technologies
+  - cisco's flexstack 
+  - flexstack plus stacking technology
+
+
+### NAT
+
+- translates private address to a publicly available address
+- implemented due to ipv4 exhaustion
+- 3 types of NAT
+  - Static NAT
+    - 1 private ipv4 address goes to 1 public ipv4 address
+  - Dynamic NAT
+    - uses a pool of public ipv4 address to map to a private addresses ipv4 address
+  - PAT (Port overload translation or overloading)
+    - most popular
+    - how most residential networks are setup
+
 ## Helpful Commands
 
 ### General Commands
@@ -655,14 +685,15 @@ these binary combinations continue so on and so on`
 - `hostname Router1`
 - `ip address 192.168.1.1 255.255.255.0`
 - `enable password cisco`
-- `conf t -> service password-encryption` makes enable password encrypted
-- `enable secret cisco123` secret password overrides enable password
+- `conf t -> service password-encryption` ! makes enable password encrypted
+- `enable secret cisco123` ! secret password overrides enable password
 - `conf t -> line vty 0 4 -> transport input telnet -> password cisco -> login`
 - `conf t -> line con 0 -> password cisco`
 - `conf t -> line con 0 -> login`
 - `no ip domain-lookup`
+- `erase startup-config` ! delete startup config from NVRAM when SHTF
+- `show protocols` ! shows active network protocols
 
--
 
 ### VLANs
 
@@ -749,6 +780,12 @@ these binary combinations continue so on and so on`
 - `S1# show monitor`
 - `S1(config)# no monitor session 1`
 
+### NAT
+
+- `R2(config)#ip nat inside source static 10.1.1.1 8.1.1.5` 
+- `R2# show ip nat translations`
+- `R2# show ip nat statistics`
+
 ## Resources
 
 ## helpful links
@@ -767,3 +804,9 @@ Automation and programmability = 10%
 [David Bombals binary/decimal/subnetting] quizzes(<https://davidbombal.com/free-quiz/>)
 
 [Network Chuck's sweet Fiber video](https://youtu.be/E3DEJ7odWq0)
+
+## Shortcuts
+- CTRL + A = moves cursor to beginning of command line
+- CTRL + E = moves cursor to end of command line
+- CTRL + Shift + 6 = interrupt command link ping
+- 
