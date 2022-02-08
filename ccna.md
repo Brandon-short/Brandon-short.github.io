@@ -40,6 +40,9 @@ permalink: /ccna/
     - [Routing Protocols](#routing-protocols)
     - [Switch Stacking](#switch-stacking)
     - [NAT](#nat)
+    - [QOS](#qos)
+      - [Policers & Shapers](#policers--shapers)
+      - [Queueing](#queueing)
   - [Helpful Commands](#helpful-commands)
     - [General Commands](#general-commands)
     - [VLANs](#vlans-1)
@@ -51,6 +54,8 @@ permalink: /ccna/
     - [SYSLOG](#syslog)
     - [SPAN ports](#span-ports)
     - [NAT](#nat-1)
+    - [Routing](#routing)
+  - [RIPv2](#ripv2)
   - [Resources](#resources)
   - [helpful links](#helpful-links)
   - [Shortcuts](#shortcuts)
@@ -678,6 +683,63 @@ these binary combinations continue so on and so on`
     - most popular
     - how most residential networks are setup
 
+### QOS
+
+#### Policers & Shapers 
+
+- policers
+  - policiers can resend traffic or remark traffic to a lower class then resend it
+  - can drop traffic
+    - will result in TCP Resets or retransmissions
+  - good for ingress traffic due to saving bandwidth and CPU resources
+- Shapers
+  - Will delayor buffer traffic, traffic becomes smoothed
+  - a more gentle approach, will introduce delay and jitter when oversubscribed
+  - fewer TCP retransmissions
+- Policers vs shapers
+  - Policers won't delay traffic, shapers will
+
+#### Queueing
+
+- Round Robin Queuing Mechanisms
+  - all traffic treated the same way
+    - real time traffic could see delays
+- Strict Queuing Mechanism
+  - High priority traffic like VOIP can starve low priority traffic
+- Queuing is only used when there's congestion
+- FIFO Queue
+  - first in first out
+- PQ ( priority Queue)
+  - queues = High, Medium, normal, & low
+    - High priority queue always goes first
+    - medium only goes after high priority is services
+    - normal only goes after high and medium are serviced
+    - low only goes after high and medium and normal are serviced
+- CQ (Custom queuing)
+  - 16 queue's serviced in a round robin scheduling fashion
+  - provides traffic guarantees
+  - voip traffic can get delayed
+- Weighted Fair Queueing
+  - Weight added to flows based on factors like RSVP or ip precedence
+    - better for VOIP and modern networks because of how it quickly handles smaller packets
+    - no bandwidth guarantees
+- Class-based weighted fair queueing
+  - can give traffic classes minimum bandwidth guarantees
+    - like VOIP/HTTP/FTP/Video/etc
+    - no latency guarantees so only good for data networks 
+- Low Latency Queueing
+  - classes are put in classes and allows for realtime traffic like voip to be prioritized
+  - also allows for minimum bandwidth guarantees and policing so that priority traffic doesn't starve out other traffic
+- WRED
+  - weighted random early detection
+    - used to avoid congestion
+    - drops some flows so that certain hosts will slow down. this allows other hosts to speed up so the buffer doesn't get maxed out and then everything slows down at once
+
+
+
+
+
+
 ## Helpful Commands
 
 ### General Commands
@@ -685,7 +747,7 @@ these binary combinations continue so on and so on`
 - `hostname Router1`
 - `ip address 192.168.1.1 255.255.255.0`
 - `enable password cisco`
-- `conf t -> service password-encryption` ! makes enable password encrypted
+- `conf t -> service password-encryption` ! makes passwords encrypted
 - `enable secret cisco123` ! secret password overrides enable password
 - `conf t -> line vty 0 4 -> transport input telnet -> password cisco -> login`
 - `conf t -> line con 0 -> password cisco`
@@ -785,6 +847,20 @@ these binary combinations continue so on and so on`
 - `R2(config)#ip nat inside source static 10.1.1.1 8.1.1.5` 
 - `R2# show ip nat translations`
 - `R2# show ip nat statistics`
+
+
+### Routing
+
+- `R1#show ip route`
+
+## RIPv2
+
+- `R1(config)#router rip`
+- `R1(config-router)#version 2`
+- `R1(config-router)#network 192.168.1.0`
+- `R1(config-router)#network 192.168.2.0`
+- `R1(config-router)#no auto-summary` ! In case something like a 172.16.0.0/16 would cause conflicts
+
 
 ## Resources
 
