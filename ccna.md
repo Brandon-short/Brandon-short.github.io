@@ -25,9 +25,6 @@ permalink: /ccna/
   - [Cables](#cables)
   - [Network Devices](#network-devices)
   - [Duplexes and Speeds](#duplexes-and-speeds)
-  - [IP & Connections](#ip--connections)
-  - [OSPF](#ospf)
-  - [Multicast](#multicast)
   - [Networking Basics](#networking-basics-1)
     - [Vlans](#vlans)
     - [STP](#stp)
@@ -38,6 +35,8 @@ permalink: /ccna/
     - [routing terms](#routing-terms)
     - [Types of routing protocols](#types-of-routing-protocols)
     - [Routing Protocols](#routing-protocols)
+  - [OSPF](#ospf)
+  - [Multicast](#multicast)
     - [Switch Stacking](#switch-stacking)
     - [NAT](#nat)
     - [QOS](#qos)
@@ -147,14 +146,14 @@ permalink: /ccna/
 |---|---|---|
 |FTP data   |20        |TCP      |
 |FTP command|21        |TCP      |
-|ssh       |22       |UDP      |
+|SSH       |22       |UDP      |
 |Telnet     |23       |UDP      |
-|smtp     |25       |TCP      |
+|SMTP     |25       |TCP      |
 |DNS        |53       |TCP & UDP  |
 |TFTP       |69       |UDP      |
-|http    |80        |TCP        |
-|pop3    |110        |TCP        |
-|https      |443      |TCP      |
+|HTTP    |80        |TCP        |
+|POP3    |110        |TCP        |
+|HTTPS      |443      |TCP      |
 
 ### Port Ranges
 
@@ -231,6 +230,7 @@ permalink: /ccna/
 - IPv4 Link-Local Addresses
   - RFC 3927 Automatic Private IP Address ( APIPA)
   - non-routable
+  - 169.254.X.X/16
 - Subnet Masks
   - if 2 devices are on the same subnet they may not need a default gateway. If they are not on the same subnet they may require a default gateway to communicate
 - CIDR
@@ -394,6 +394,11 @@ these binary combinations continue so on and so on`
 - Rollover cable
   - special cable that connects to console ports of routers
   - usually its a console to db9
+- SFP vs SFP+
+  - identical in appearance
+  - SFP+ is newer and supports speeds up to 10 - 16gbps
+  - SFP doesn't support 10gbps and is usually in 100mbits to 1gbps
+
 
 ## Network Devices
 
@@ -413,61 +418,19 @@ these binary combinations continue so on and so on`
   - layer 2 usually
   - has mac address table
   - will flood broadcast and multicast traffic by default
+  - each port on switch is a seperate collision domain
+  - does not break up your broadcast domains
 - Routers
   - layer 3 devices
   - network layer
   - routes via IP addresses
+  - all ports on router will be different broadcast domains
 
 ## Duplexes and Speeds
 
 - happens when autonegotation fails or manual configurations are incorrect
 - causes performance issues
 
-## IP & Connections
-
-## OSPF
-
-- Open Shortest Path First
-- Link State routing protocol
-  - open standard
-- Link = router interface & state = description of an interface and it's relationship to neighboring routers
-- topological database / link state database
-  - collection of all the link states aggregated
-  - Router's create neighbor relationships using unicast or multicast
-- uses layer 3 IP protocols
-- by default database synchronized every 30 min.
-- 
-
-## Multicast
-
-- Devices that need to receive multicast video will join a group
-- Uses Class D address 224.0.0.0 - 239.255.255.255
-  - 224.0.0.0 - 224.0.0.255 = reserved for link local address
-  - OSPF reserved for 224.0.0.5 - 224.0.0.6
-  - rip v2 reserves 224.0.0.9
-  - eigrp reserves 224.0.0.10
-  - 224.0.1.0 - 238.255.255.255 reserved for globally scoped addresses
-  - Source Specific Multicast addresses reserves 232.0.0.0 - 232.255.255.255
-  - 233.0.0.0 - 233.255.255.255 reserved for  GLOP addresses
-    - based on Autonomous system numbers
-  - 239.0.0.0 - 239.255.255.255 limited scope address
-    - kind of like 172.16.x.x and 192.168.1.x
-
-- ### IGMP
-
-  - IGMPv2 allows receivers to leave IGMP Groups, IGMPv1 didn't do that
-  - Switches must be programmed for IGMP snooping.
-  - IGMPv3 allows a receiver to choose a source device
-  - Multicast can do Reverse Path forwarding check to prevent receiving duplicate copies of data
-  - PIM
-    - protocol independent multicast
-      - a type of multicast routing protocol
-      - PIM dense mode
-      - initial multicast traffic gets flooded and then pruned and could be every 3 min.
-      - PIM sparse mode
-        - a shared distribution tree
-        - you set a router as a rendezvous point
-        - no flooding
 
 ## Networking Basics
 
@@ -661,10 +624,51 @@ these binary combinations continue so on and so on`
 
 ### Routing Protocols
 
-- OSPF
-  - can be broken up into heiarchies
+## OSPF
+
+- Open Shortest Path First
+- Link State routing protocol
+  - open standard
+- Link = router interface & state = description of an interface and it's relationship to neighboring routers
+- topological database / link state database
+  - collection of all the link states aggregated
+  - Router's create neighbor relationships using unicast or multicast
+- uses layer 3 IP protocols
+- by default database synchronized every 30 min.
+-   - can be broken up into heiarchies
   - breaks the AS into multiple areas
   - uses ABRs area border routers and internal routers and AS border router and backbone routers
+
+## Multicast
+
+- Devices that need to receive multicast video will join a group
+- Uses Class D address 224.0.0.0 - 239.255.255.255
+  - 224.0.0.0 - 224.0.0.255 = reserved for link local address
+  - OSPF reserved for 224.0.0.5 - 224.0.0.6
+  - rip v2 reserves 224.0.0.9
+  - eigrp reserves 224.0.0.10
+  - 224.0.1.0 - 238.255.255.255 reserved for globally scoped addresses
+  - Source Specific Multicast addresses reserves 232.0.0.0 - 232.255.255.255
+  - 233.0.0.0 - 233.255.255.255 reserved for  GLOP addresses
+    - based on Autonomous system numbers
+  - 239.0.0.0 - 239.255.255.255 limited scope address
+    - kind of like 172.16.x.x and 192.168.1.x
+
+- ### IGMP
+
+  - IGMPv2 allows receivers to leave IGMP Groups, IGMPv1 didn't do that
+  - Switches must be programmed for IGMP snooping.
+  - IGMPv3 allows a receiver to choose a source device
+  - Multicast can do Reverse Path forwarding check to prevent receiving duplicate copies of data
+  - PIM
+    - protocol independent multicast
+      - a type of multicast routing protocol
+      - PIM dense mode
+      - initial multicast traffic gets flooded and then pruned and could be every 3 min.
+      - PIM sparse mode
+        - a shared distribution tree
+        - you set a router as a rendezvous point
+        - no flooding
 
 ### Switch Stacking
 
