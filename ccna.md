@@ -43,6 +43,7 @@ permalink: /ccna/
     - [QOS](#qos)
       - [Policers & Shapers](#policers--shapers)
       - [Queueing](#queueing)
+    - [VOIP](#voip)
   - [Helpful Commands](#helpful-commands)
     - [General Commands](#general-commands)
     - [VLANs](#vlans-1)
@@ -55,7 +56,7 @@ permalink: /ccna/
     - [SPAN ports](#span-ports)
     - [NAT](#nat-1)
     - [Routing](#routing)
-  - [RIPv2](#ripv2)
+      - [RIPv2](#ripv2)
   - [Resources](#resources)
   - [helpful links](#helpful-links)
   - [Shortcuts](#shortcuts)
@@ -96,9 +97,9 @@ permalink: /ccna/
 ## TCP/IP Model
 
 - Newest Version of CCNA is using hybrid tcp/ip model:
-  - 5 Application
+  - `5 Application`
         - PDU = application data
-  - 4 Transport
+  - `4 Transport`
         - PDU = Segments
         - TCP
           - Connection oriented protocol
@@ -128,16 +129,16 @@ permalink: /ccna/
             - 16 bit source port, 16bit destination port
             - 16 bit UDP length, 16 bit UDP checksum
             - data
-  - 3 Network
+  - `3 Network`
         - PDU = Packets
         - IP Protocol is not connection oriented like TCP
           - Packets are treated independently and may take different paths
           - IP is a best effort delivery system with no data recovery features
-  - 2 Data Link
+  - `2 Data Link`
         - PDU = Frames
         - if Type field = 0x800 that indicates ipv4
         - if Type field = 0x806 that indicates arp
-  - 1 Physical
+  - `1 Physical`
         - PDU = Bits
 
 ### Important ports to remember & their protocol
@@ -428,6 +429,14 @@ these binary combinations continue so on and so on`
 
 - Open Shortest Path First
 - Link State routing protocol
+  - open standard
+- Link = router interface & state = description of an interface and it's relationship to neighboring routers
+- topological database / link state database
+  - collection of all the link states aggregated
+  - Router's create neighbor relationships using unicast or multicast
+- uses layer 3 IP protocols
+- by default database synchronized every 30 min.
+- 
 
 ## Multicast
 
@@ -735,7 +744,18 @@ these binary combinations continue so on and so on`
     - used to avoid congestion
     - drops some flows so that certain hosts will slow down. this allows other hosts to speed up so the buffer doesn't get maxed out and then everything slows down at once
 
+### VOIP
 
+- Skinny Call Control Protocol (SCCP)
+  - Cisco proprietary terminal control protocol
+  - client/server model
+- Session initiation protocol (SIP)
+  - open standard
+  - p2p
+  - some processing down by endpoint
+  - provides 'presence'
+  - 
+  - 
 
 
 
@@ -853,7 +873,7 @@ these binary combinations continue so on and so on`
 
 - `R1#show ip route`
 
-## RIPv2
+#### RIPv2
 
 - `R1(config)#router rip`
 - `R1(config-router)#version 2`
