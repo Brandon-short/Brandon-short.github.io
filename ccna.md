@@ -439,7 +439,7 @@ these binary combinations continue so on and so on`
 - vlan = a broadcast domain = logical network (subnet)
 - when a frame arrives @ switch it gets tagged
 - trunking
-  - ISL
+  - ISL (Inter-Switch Link)
     - cisco proprietary
   - 802.1q
 - Trunk ports allow you to send VLAN info across ports for multiple vlans
@@ -638,6 +638,31 @@ these binary combinations continue so on and so on`
 -   - can be broken up into heiarchies
   - breaks the AS into multiple areas
   - uses ABRs area border routers and internal routers and AS border router and backbone routers
+  - Packet Types
+    - Hello
+      - dynamically discovers neighbors
+      - default 10 seconds on broadcast ethernet segments
+      - dead timer = 4x the hello interval
+    - Database Description (DD/DBD)
+      - used to exchange versions of each link state advertisment
+    - Link State Request (LSR)
+      - request for all LSA information
+    - link state update (LSU)
+      - contains LSAs
+      - response from LSRs
+    - Link State acknowledgement (LSAck)
+      - confirms receipt of an LSU
+  - hierarchies
+    - area 0 is backbone area
+      - all traffic that traverses to different area's will route through the backbone area
+    - you should design OSPF by breaking routers up into areas
+    - Area border routers (ABR)
+      - routers that sit at the border between areas 0 and another area
+      - ABRs can summarize routes but must be done carefully
+    - Autonomous system border router (ASBR)
+      - routers that sit on the border between 2 autonomous systems
+    - Internal routers
+      - internal to a single OSPF area
 
 ## Multicast
 
@@ -758,10 +783,6 @@ these binary combinations continue so on and so on`
   - p2p
   - some processing down by endpoint
   - provides 'presence'
-  - 
-  - 
-
-
 
 
 ## Helpful Commands
@@ -783,6 +804,13 @@ these binary combinations continue so on and so on`
 
 ### VLANs
 
+- General
+  - `Switch# show vlan`
+  - `Switch# show vlan 1`
+  - `Switch# show vlan brief`
+  - `Switch# vlan database` 
+  - `Switch# show vtp status`
+
 - Access Ports
   - `Switch(config-if)# switchport mode access`
   - `Switch(config-if)# switchport nonegotiate`
@@ -795,15 +823,16 @@ these binary combinations continue so on and so on`
   - `Switch(config-if)# switchport trunk native vlan 1`
 - VTP
   - `Switch(config)vtp domain ccna`
-  - `Switch#vtp domain ccna`
+  - `Switch(config)vtp mode server`
   - `Switch(config)vtp mode client`
+  - `Switch# show vtp status`
 
 ### STP/CDP/LLDP/Etherchannel
 
 - STP
   - `Switch(config)spanning-tree portfast edge bpduguard`
   - `Switch(config-if)#spanning-tree portfast`
-  - ` Core2(config-if)#spanning-tree link-type point-to-point `
+  - `Core2(config-if)#spanning-tree link-type point-to-point `
 - CDP
   - `Switch#show cdp neighbors`
   - `Switch(config) cdp run`
