@@ -49,13 +49,14 @@ permalink: /ccna/
     - [STP/CDP/LLDP/Etherchannel](#stpcdplldpetherchannel)
     - [IP](#ip)
     - [HSRP (hot standby router protocol)](#hsrp-hot-standby-router-protocol)
-    - [EIGRP](#eigrp)
     - [NTP](#ntp)
     - [SYSLOG](#syslog)
     - [SPAN ports](#span-ports)
     - [NAT](#nat-1)
     - [Routing](#routing)
       - [RIPv2](#ripv2)
+      - [EIGRP](#eigrp)
+      - [OSPF](#ospf-1)
   - [Resources](#resources)
   - [helpful links](#helpful-links)
   - [Shortcuts](#shortcuts)
@@ -663,6 +664,23 @@ these binary combinations continue so on and so on`
       - routers that sit on the border between 2 autonomous systems
     - Internal routers
       - internal to a single OSPF area
+    - Designated Routers (DR) & backup Designated Routers
+      - DRs 
+        - Highest priority
+        - default priority is 1
+        - ranges from 1 to 255
+        - 0 disables the router from being DR
+        - listen on multicast address 224.0.0.6
+        - only DR receives update
+        - DR gets the update and then forwards it to all other routers in segment
+        - only DR and BDR have full relationships with all other routers
+        - BDR becomes DR if DR fails
+  - SPF Algorithm
+    - uses a cumulative cost to calculate route
+      - default reference bandwidth = 10^8
+      - cost = 10^8 / bandwidth
+        - 100,000,000 / (10,000,000) or 10mbps = 10
+        - 
 
 ## Multicast
 
@@ -800,6 +818,10 @@ these binary combinations continue so on and so on`
 - `no ip domain-lookup`
 - `erase startup-config` ! delete startup config from NVRAM when SHTF
 - `show protocols` ! shows active network protocols
+- `Switch# (config)# interface range gigabitEthernet 1/0/23 - 24 `
+- `Switch2#show interfaces status` 
+- `Switch(config)#ip host Ohio 195.41.31.11` ! name a name to an ip address
+- `Switch# show hosts`
 
 
 ### VLANs
@@ -811,9 +833,10 @@ these binary combinations continue so on and so on`
   - `Switch# vlan database` 
   - `Switch# show vtp status`
 
+
 - Access Ports
   - `Switch(config-if)# switchport mode access`
-  - `Switch(config-if)# switchport nonegotiate`
+  - `Switch(config-if)# switchport nonegotiate` ! disables DTP (Dynamic Trunking protocol)
   - `Switch(config-if)# switchport access vlan 69`
   - `Switch(config-if)# switchport voice vlan 666`
 - Trunk Ports
@@ -854,10 +877,6 @@ these binary combinations continue so on and so on`
 - ` R1(dhcp-config)# default-router 10.1.10.1 `
 - ` R1(dhcp-config)# dns-server 10.1.1.254 `
 
--
-- ` S1(config)# ip route 1.1.1.1 255.255.255.255 10.1.1.254 `
-- `S1(config)# ip routing`
-- ` S1(config)# ip default-gateway 10.1.1.254 `
 - `S1(config-if)# ip helper-address 10.1.1.254`
 
 ### HSRP (hot standby router protocol)
@@ -867,12 +886,6 @@ these binary combinations continue so on and so on`
 - ` Core1(config-if)# standby 1 preempt `
 - `Core1# show standby`
 
-### EIGRP
-
-- `IntRouter(config)#router eigrp 100`
-- `IntRouter(config-router)# network 10.1.1.0 0.0.0.255`
-- `IntRouter(config-router)# no auto-summary`
-- `IntRouter# show ip eigrp interfaces`
 
 ### NTP
 
@@ -905,6 +918,10 @@ these binary combinations continue so on and so on`
 ### Routing
 
 - `R1#show ip route`
+- `S1(config)# ip route 1.1.1.1 255.255.255.255 10.1.1.254 `
+- `R1(config)# ip route 0.0.0.0 0.0.0.0 192.168.2.1 ` ! a more permissive static route than above
+- `S1(config)# ip routing`
+- `S1(config)# ip default-gateway 10.1.1.254 `
 
 #### RIPv2
 
@@ -914,6 +931,19 @@ these binary combinations continue so on and so on`
 - `R1(config-router)#network 192.168.2.0`
 - `R1(config-router)#no auto-summary` ! In case something like a 172.16.0.0/16 would cause conflicts
 
+#### EIGRP
+
+- `IntRouter(config)#router eigrp 100`
+- `IntRouter(config-router)# network 10.1.1.0 0.0.0.255`
+- `IntRouter(config-router)# no auto-summary`
+- `IntRouter# show ip eigrp interfaces`
+
+#### OSPF
+
+- `Router1(config-if)#ip ospf priority 10`
+- `Router1(config)#interface loopback 0`
+- `Router1(config-if)#ip address 1.1.1.1 255.255.255.0`
+- 
 
 ## Resources
 
