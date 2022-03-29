@@ -822,7 +822,10 @@ these binary combinations continue so on and so on`
 - `Switch2#show interfaces status` 
 - `Switch(config)#ip host Ohio 195.41.31.11` ! name a name to an ip address
 - `Switch# show hosts`
-
+- `Router1# show ip protocols`
+- `Router1# show ip ospf database`
+- `Router1# show ip ospf neighbor`
+- `Router1# show ip ospf interface`
 
 ### VLANs
 
@@ -832,6 +835,7 @@ these binary combinations continue so on and so on`
   - `Switch# show vlan brief`
   - `Switch# vlan database` 
   - `Switch# show vtp status`
+
 
 
 - Access Ports
@@ -942,8 +946,12 @@ these binary combinations continue so on and so on`
 
 - `Router1(config-if)#ip ospf priority 10`
 - `Router1(config)#interface loopback 0`
-- `Router1(config-if)#ip address 1.1.1.1 255.255.255.0`
-- 
+- `Router1(config-if)#ip address 1.1.1.0 0.0.0.255`
+- `Router1# show ip protocols` ! shows active routing protocols
+- `Router1# show ip ospf database` ! shows info about OSPF Link state database
+- `Router1# show ip ospf neighbor` ! shows info about OSPF neighbrs
+- `Router1# show ip ospf interface` ! shows info about OSPF interface info
+ 
 
 ## Resources
 
