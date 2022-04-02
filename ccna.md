@@ -848,6 +848,7 @@ these binary combinations continue so on and so on`
   - `Switch(config-if)# switchport mode trunk`
   - `Switch(config-if)# switchport trunk allowed vlan 69,100-200`
   - `Switch(config-if)# switchport trunk native vlan 1`
+  - `Router1(config-subif)# encapsulation dot1q 2 ` ! used for ROAS & intervlan routing. in this example it allows subinterface to use dot1q trunking to see vlan ID 2
 - VTP
   - `Switch(config)vtp domain ccna`
   - `Switch(config)vtp mode server`
@@ -862,6 +863,10 @@ these binary combinations continue so on and so on`
   - `Core2(config-if)#spanning-tree link-type point-to-point `
 - CDP
   - `Switch#show cdp neighbors`
+  - `Router#show cdp`
+  - `Router#show cdp entry Router1`
+  - `Router#show cdp interface`
+  - `Router#show cdp traffic`
   - `Switch(config) cdp run`
 - LLDP
   - `Switch#show lldp`
@@ -944,14 +949,16 @@ these binary combinations continue so on and so on`
 
 #### OSPF
 
-- `Router1(config-if)#ip ospf priority 10`
-- `Router1(config)#interface loopback 0`
-- `Router1(config-if)#ip address 1.1.1.0 0.0.0.255`
+- `Router1(config-router)#ip ospf 1`
+- `Router1(config-router)#network 1.1.1.0 0.0.0.255` ! or 
+- `Router1(config-router)#network 1.1.1.1 0.0.0.0` ! or 
+- `Router1(config-router)#interface g0/0` ! programming interface & not network
+- `Router1(config-if)# ip ospf 1 area 0` ! programming interface & not network
 - `Router1# show ip protocols` ! shows active routing protocols
 - `Router1# show ip ospf database` ! shows info about OSPF Link state database
 - `Router1# show ip ospf neighbor` ! shows info about OSPF neighbrs
 - `Router1# show ip ospf interface` ! shows info about OSPF interface info
- 
+- `Router1(config)#interface loopback 0` ! loopbacks are good to program so they'll be used for router ID in ospf 
 
 ## Resources
 
@@ -975,5 +982,5 @@ Automation and programmability = 10%
 ## Shortcuts
 - CTRL + A = moves cursor to beginning of command line
 - CTRL + E = moves cursor to end of command line
-- CTRL + Shift + 6 = interrupt command link ping
-- 
+- CTRL + Shift + 6 = interrupt command like ping
+- CTRL + Shift + 6 then X = hide telnet sessions without breaking it
