@@ -872,10 +872,22 @@ these binary combinations continue so on and so on`
   - `Switch#show lldp`
   - `Switch#show lldp neighbors detail`
 - Etherchannel
-  - ` Core2(config)#int range gigabitEthernet 1/0/23 - 24 `
-  - ` Core2(config-if-range)#switchport mode trunk `
-  - ` Core2(config-if-range)#channel-group 1 mode active `
-  - ` Core2#show etherchannel summary `
+  - `Core2(config)#int range gigabitEthernet 1/0/23 - 24`
+  - `Core2(config-if-range)#switchport mode trunk`
+  - `Core2(config-if-range)#channel-group 1 mode active`
+  - `Core2#show etherchannel summary`
+- LACP
+  - `Switch1(config)#int range gigabitEthernet 1/0/23 - 24`
+  - `Switch1(config-if-range)#channel-protocol lacp`
+  - `Switch1(config-if-range)#channel-group 1 mode passive`
+  - `Switch1(config-if-range)#channel-group 1 mode active`
+  - `Switch1#show interfaces port-channel 1`
+  - `Switch1#show etherchannel port-channel`
+  - `Switch1#show etherchannel summary`
+  - `Switch1(config)#lacp system priority 100`
+  - `Switch1(config-if)#lacp port-priority 100`
+
+
 
 ### IP
 
