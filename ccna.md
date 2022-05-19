@@ -43,6 +43,8 @@ permalink: /ccna/
       - [Policers & Shapers](#policers--shapers)
       - [Queueing](#queueing)
     - [VOIP](#voip)
+    - [GRE tunnels](#gre-tunnels)
+  - [Wifi](#wifi)
   - [Helpful Commands](#helpful-commands)
     - [General Commands](#general-commands)
     - [VLANs](#vlans-1)
@@ -802,6 +804,37 @@ these binary combinations continue so on and so on`
   - some processing down by endpoint
   - provides 'presence'
 
+### GRE tunnels
+
+- Generric Routing encapsulation tunneling
+  - point to point tunnel (kind of like a vpn)
+  - allows the transport of higher level protocols like ipv4 & ipv6
+  - has no authentication or encryption
+  - allows multicast routing protocols
+
+## Wifi
+
+- Wifi standards
+  - wifi 4 aka 802.11n
+  - wifi 5 aka 801.11ac
+  - wifi 6 aka 802.11 ax
+- Radio frequencies
+  - 2.4 GHz
+    - channels 1-11  and if you use 1 6 and 11 you can avoid overlap and increase throughput
+  - 5 GHz
+    - The following 5 GHz channels are supported with 20MHz channel width:
+      - 36
+      - 40
+      - 44
+      - 48
+      - 149
+      - 153
+      - 157
+      - 161
+      - 165
+- Wifi Security
+  - Protected Management Frames (PMF)
+    - Provide protection for unicast and multicast management action frames. Unicast management action frames are protected from both eavesdropping and forging, and multicast management action frames are protected from forging
 
 ## Helpful Commands
 
@@ -876,6 +909,7 @@ these binary combinations continue so on and so on`
   - `Core2(config-if-range)#switchport mode trunk`
   - `Core2(config-if-range)#channel-group 1 mode active`
   - `Core2#show etherchannel summary`
+  - `Core2(config-if-range)#no switchport` ! convert switchtport to routed port
 - LACP
   - `Switch1(config)#int range gigabitEthernet 1/0/23 - 24`
   - `Switch1(config-if-range)#channel-protocol lacp`
@@ -892,13 +926,20 @@ these binary combinations continue so on and so on`
 ### IP
 
 - DHCP
+- ` R1(config)# service dhcp`
 - ` R1(config)# ip dhcp excluded-address 10.1.10.1 10.1.10.10 `
 - ` R1(config)# ip dhcp pool vlan10 `
 - ` R1(dhcp-config)# network 10.1.10.0 255.255.255.0 `
 - ` R1(dhcp-config)# default-router 10.1.10.1 `
 - ` R1(dhcp-config)# dns-server 10.1.1.254 `
-
-- `S1(config-if)# ip helper-address 10.1.1.254`
+- ` R1(dhcp-config)# lease 2 ` ! set lease to 2 days
+- ` R1(dhcp-config)# domain-name brandonvshort.com`
+- ` R1# show ip dhcp binding` ! show DHCP clients
+- ` R1# show ip dhcp server statistics `
+- ` R2(config-if)#ip address dhcp` ! tell interface to pull IP from dhcp
+- ` R2# show dhcp lease`
+- ` R2# show dhcp server`
+- ` S1(config-if)# ip helper-address 10.1.1.254`
 
 ### HSRP (hot standby router protocol)
 
