@@ -52,7 +52,7 @@ permalink: /study/
 
 
 
- ### Six 
+### Six 
  
 - Always engage in deeper processing
 - Try to think how to apply or use the new concept. Ask yourself, when or where would the concept have value? Or, have you seen the application of similar concepts? The more you think about the deeper implications of the material; the more likely it will make sense, and you will remember it.
