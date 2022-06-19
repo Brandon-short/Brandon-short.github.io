@@ -835,6 +835,8 @@ these binary combinations continue so on and so on`
 - Wifi Security
   - Protected Management Frames (PMF)
     - Provide protection for unicast and multicast management action frames. Unicast management action frames are protected from both eavesdropping and forging, and multicast management action frames are protected from forging
+- the technology is more like a half duplex because its doing collision avoidance
+- APs in the same geographical area should be on different channels to avoid co-channel contention
 
 ## Helpful Commands
 
@@ -859,6 +861,8 @@ these binary combinations continue so on and so on`
 - `Router1# show ip ospf database`
 - `Router1# show ip ospf neighbor`
 - `Router1# show ip ospf interface`
+- `Router1# show ip int brief` /line /interface ! filtering on linux and ios
+- `Router1#(config) shell processing full` ! lets you use grep or | and maybe other linux commands
 
 ### VLANs
 
