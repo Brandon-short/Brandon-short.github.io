@@ -401,6 +401,13 @@ these binary combinations continue so on and so on`
   - identical in appearance
   - SFP+ is newer and supports speeds up to 10 - 16gbps
   - SFP doesn't support 10gbps and is usually in 100mbits to 1gbps
+- QSFP
+  - Quad Small form-Factor Pluggables 
+  - QSFP data rates get up to 1 Gbps per channel, allowing for 4X1 G cables and stackable networking designs that achieve better throughput
+- QSFP+
+  - QSFP+ can reach speeds of 10 Gbps per line. This makes it a 40G connection type
+- QSFP28
+  - QSFP28 (quad small form-factor pluggable 28) is designed for 100G applications
 
 
 ## Network Devices
@@ -944,6 +951,12 @@ these binary combinations continue so on and so on`
 - ` R2# show dhcp lease`
 - ` R2# show dhcp server`
 - ` S1(config-if)# ip helper-address 10.1.1.254`
+
+- DNS
+- ` R1# configure terminal `
+- ` R1(config)# ip dns server `
+- ` R1(config)# ip domain-lookup `
+- ` R1(config)# ip name-server 8.8.8.8 `
 
 ### HSRP (hot standby router protocol)
 
