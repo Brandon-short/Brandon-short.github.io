@@ -28,6 +28,7 @@ permalink: /ccna/
   - [Networking Basics](#networking-basics-1)
     - [Vlans](#vlans)
     - [STP](#stp)
+    - [NAT](#nat)
   - [IP Routing](#ip-routing)
     - [Routing vs Routed protocols](#routing-vs-routed-protocols)
     - [Static vs Dynamic Routing](#static-vs-dynamic-routing)
@@ -35,10 +36,10 @@ permalink: /ccna/
     - [routing terms](#routing-terms)
     - [Types of routing protocols](#types-of-routing-protocols)
     - [Routing Protocols](#routing-protocols)
-  - [OSPF](#ospf)
-  - [Multicast](#multicast)
+      - [OSPF](#ospf)
+      - [Multicast](#multicast)
     - [Switch Stacking](#switch-stacking)
-    - [NAT](#nat)
+    - [NAT](#nat-1)
     - [QOS](#qos)
       - [Policers & Shapers](#policers--shapers)
       - [Queueing](#queueing)
@@ -54,7 +55,7 @@ permalink: /ccna/
     - [NTP](#ntp)
     - [SYSLOG](#syslog)
     - [SPAN ports](#span-ports)
-    - [NAT](#nat-1)
+    - [NAT](#nat-2)
     - [Routing](#routing)
       - [RIPv2](#ripv2)
       - [EIGRP](#eigrp)
@@ -494,6 +495,7 @@ these binary combinations continue so on and so on`
 - Spanning Tree protocol
 - prevents layer 2 loops in switched environments
 - 802.1d the OG
+- Modern network architecture recommends redundancy like STP or LACP
 - RSTP
   - rapid spanning tree
   - supports a single instance of spanning tree
@@ -505,13 +507,14 @@ these binary combinations continue so on and so on`
 - MSTP
   - multiple spanning tree
   - optimizes PVST by mapping multiple VLANs to the same spanning tree instance
-  - hast RSTP built in for speedy convergence
+  - has RSTP built in for speedy convergence
   - 802.1w
   - used when you have hundreds or thousands of vlans
 - PVST
   - per vlan spanning tree
   - only supported ISL
   - separate 802.1d spanning tree instance for each vlan
+    - therefore each vlan has it's own root and own calculations
 - PVST +
   - supports ISL and 802.1q
 - BPDU
@@ -550,6 +553,32 @@ these binary combinations continue so on and so on`
 - CDP / LLDP
   - cisco discovery protocol
   - uses multicast frames
+
+### NAT 
+
+- a few different kinds of nat that perform similar functions
+  - Source NAT
+    - Router will translate the source IP of a packet traversing it's interface
+      - Static NAT
+        - statically configring one to one mappings or private to public ip addresses
+        - 
+  - Dynamic Nat
+    - Router dynamically maps inside local addresses to inside global addresses
+    - can use ACLs
+    - NAT pool is used to define available inside global addresses
+      - if all the inside global addresses get used up you get NAT pool exhaustion
+  -  PAT ( AKA NAT overload )
+     -  both IPs and Ports will get translated if needed
+     -  most widely used for homes and businesses
+- inside/outside local/global
+  - inside local is usually an endpoint
+  - inside global is usually the router's public ip address
+  - outside local = ip address of the outside host from the perspective of the local network
+    - is usually the server's public ip address
+    - is usually the same as outside global network unless destination NAT is used
+  - outside global = ip address of the outside host from the perspective of the outside network
+    - is usually the server's public ip address
+    - is usually the same as outside local network unless destination NAT is used
 
 ## IP Routing
 
@@ -634,7 +663,7 @@ these binary combinations continue so on and so on`
 
 ### Routing Protocols
 
-## OSPF
+#### OSPF
 
 - Open Shortest Path First
 - Link State routing protocol
@@ -691,7 +720,7 @@ these binary combinations continue so on and so on`
         - 100,000,000 / (10,000,000) or 10mbps = 10
         - 
 
-## Multicast
+#### Multicast
 
 - Devices that need to receive multicast video will join a group
 - Uses Class D address 224.0.0.0 - 239.255.255.255
@@ -706,7 +735,7 @@ these binary combinations continue so on and so on`
   - 239.0.0.0 - 239.255.255.255 limited scope address
     - kind of like 172.16.x.x and 192.168.1.x
 
-- ### IGMP
+- #### IGMP
 
   - IGMPv2 allows receivers to leave IGMP Groups, IGMPv1 didn't do that
   - Switches must be programmed for IGMP snooping.
@@ -744,7 +773,7 @@ these binary combinations continue so on and so on`
     - 1 private ipv4 address goes to 1 public ipv4 address
   - Dynamic NAT
     - uses a pool of public ipv4 address to map to a private addresses ipv4 address
-  - PAT (Port overload translation or overloading)
+  - PAT (Port address translation or overloading)
     - most popular
     - how most residential networks are setup
 
@@ -870,6 +899,7 @@ these binary combinations continue so on and so on`
 - `Router1# show ip ospf interface`
 - `Router1# show ip int brief` /line /interface ! filtering on linux and ios
 - `Router1#(config) shell processing full` ! lets you use grep or | and maybe other linux commands
+- `Router1# copy running-config tftp`
 
 ### VLANs
 
