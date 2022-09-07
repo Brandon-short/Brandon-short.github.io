@@ -38,8 +38,8 @@ permalink: /ccna/
     - [Routing Protocols](#routing-protocols)
       - [OSPF](#ospf)
       - [Multicast](#multicast)
+      - [IGMP](#igmp)
     - [Switch Stacking](#switch-stacking)
-    - [NAT](#nat-1)
     - [QOS](#qos)
       - [Policers & Shapers](#policers--shapers)
       - [Queueing](#queueing)
@@ -55,7 +55,7 @@ permalink: /ccna/
     - [NTP](#ntp)
     - [SYSLOG](#syslog)
     - [SPAN ports](#span-ports)
-    - [NAT](#nat-2)
+    - [NAT](#nat-1)
     - [Routing](#routing)
       - [RIPv2](#ripv2)
       - [EIGRP](#eigrp)
@@ -735,7 +735,7 @@ these binary combinations continue so on and so on`
   - 239.0.0.0 - 239.255.255.255 limited scope address
     - kind of like 172.16.x.x and 192.168.1.x
 
-- #### IGMP
+#### IGMP
 
   - IGMPv2 allows receivers to leave IGMP Groups, IGMPv1 didn't do that
   - Switches must be programmed for IGMP snooping.
@@ -762,20 +762,6 @@ these binary combinations continue so on and so on`
 - joined together via special cables using different technologies
   - cisco's flexstack 
   - flexstack plus stacking technology
-
-
-### NAT
-
-- translates private address to a publicly available address
-- implemented due to ipv4 exhaustion
-- 3 types of NAT
-  - Static NAT
-    - 1 private ipv4 address goes to 1 public ipv4 address
-  - Dynamic NAT
-    - uses a pool of public ipv4 address to map to a private addresses ipv4 address
-  - PAT (Port address translation or overloading)
-    - most popular
-    - how most residential networks are setup
 
 ### QOS
 

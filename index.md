@@ -11,3 +11,5 @@ Landing Page for notes
 [How to study notes](https://brandonvshort.com/study/)
 
 [ccna notes](https://brandonvshort.com/ccna/)
+
+[Fortiswitch notes]
